@@ -8,7 +8,13 @@ import org.hibernate.Transaction;
 
 public class TestInsertEmployee {
 	public static void main(String[] args) {
-		// read inputs
+		// 1.create sf obj
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+
+		// 2.crate session obj
+		Session sessionObj = sf.openSession();
+
+		// 3.read inputs
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter name::");
 		String name = sc.next();
@@ -16,29 +22,19 @@ public class TestInsertEmployee {
 		System.out.println("Enter sal::");
 		int sal = sc.nextInt();
 
-		
-		// create entity obj with data
+		// 4.create entity obj with data
 		Employee empObj = new Employee();
 		empObj.setUserName(name);
 		empObj.setUsersalary(sal);
-		
-		// create sf obj
-		SessionFactory sf = HibernateUtil.getSessionFactory();
 
-		// crate session obj
-		Session sessionObj = sf.openSession();
-
-	
-		//create transaction obj
+		// open txn
+		// 5.create transaction obj
 		Transaction transaction = sessionObj.getTransaction();
-		
-		//open txn
 		transaction.begin();
-		//save the entity obj in table
 		sessionObj.save(empObj);
-		//commit txn
 		transaction.commit();
-		
+
+		//6.close session
 		System.out.println("data saved");
 		sessionObj.close();
 

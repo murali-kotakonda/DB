@@ -1,20 +1,20 @@
 package com.dao;
 
-import java.util.List;
-
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
 public class TestConn {
-public static void main(String[] args) {
-	SessionFactory sf = HibernateUtil.getSessionFactory();
-	Session s = sf.openSession();
+	public static void main(String[] args) {
+		//1.create session factory
+		SessionFactory sf = new Configuration().configure().buildSessionFactory();
+		
+		//2.open session
+		Session s = sf.openSession();
+		System.out.println("got conn");
+		// 3.C R U D
 	
-	
-	System.out.println("got conn");
-	
-	s.close();
-}
+		//4. close session
+		s.close();
+	}
 }

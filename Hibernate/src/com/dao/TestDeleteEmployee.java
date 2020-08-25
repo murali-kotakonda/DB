@@ -1,17 +1,16 @@
 package com.dao;
 
-import java.util.Scanner;
-
-import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 public class TestDeleteEmployee {
 	public static void main(String[] args) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
 
 		// create emp obj
-		String name = "muralidhar";
-		int id = 67;
+		String name = "xyz";
+		int id = 461;
 		Employee emp = new Employee(id, name);
 		
 		//perform update operation

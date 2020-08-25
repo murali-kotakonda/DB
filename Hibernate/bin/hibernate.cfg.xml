@@ -11,6 +11,8 @@
 		<property name="connection.username">scott</property>
 		<property name="connection.password">oracle</property>
 		<property name="connection.pool_size">1</property>
+		
+		<!-- hib config -->
 		<!-- SQL dialect -->
 		<property name="dialect">org.hibernate.dialect.Oracle10gDialect</property>
 
@@ -18,54 +20,58 @@
 		<property name="show_sql">true</property>
 
 		<!-- Drop and re-create the database schema on startup -->
-		
 		<property name="hbm2ddl.auto">update</property>
-		<mapping class="com.dao.Employee" />
+
+		<!-- Entity classes -->
+		
+	<mapping class="com.dao.Employee" />
+		
+	<mapping class="com.dao.tablePerHier.Person"/> 
+	<mapping class="com.dao.tablePerHier.EmployeeDetails"/> 
+	<mapping class="com.dao.tablePerHier.Student"/> 
 	
-		<mapping class="com.dao.composition.PersonWithAddress" />
-		<mapping class="com.dao.composition.StudentWithAddress" />
+	 </session-factory>
+</hibernate-configuration>
 
 
+<!--
+	
+	<mapping class="com.mnp.inherit.manytomany.Student" />
+		<mapping class="com.mnp.inherit.manytomany.Cource" />
+	
 		<mapping class="com.mnp.oneToOne.EmployeeWithAddress" />
 		<mapping class="com.mnp.oneToOne.AddressDetails" />
-
-
-		<mapping class="com.mnp.inherit.onetomany.Customer" />
-		<mapping class="com.mnp.inherit.onetomany.Accounts" />
-
 	
-	
-	
-		<mapping class="com.dao.tablePerHier.Person"/> 
-		<mapping class="com.dao.tablePerHier.EmployeeDetails"/> 
-			<mapping class="com.dao.tablePerHier.Student"/> 
-			
-			
+		
+			<mapping class="com.dao.inherit.joinTable.Person2"/> 
+			<mapping class="com.dao.inherit.joinTable.EmployeeDetails2"/>
+			 <mapping class="com.dao.inherit.joinTable.Student2"/>		
+		
 			<mapping class="com.dao.tablePerConcreteClass.Person1"/> 
 			<mapping class="com.dao.tablePerConcreteClass.EmployeeDetails1"/>
 			 <mapping 
 			class="com.dao.tablePerConcreteClass.Student1"/> 
-			
-			<mapping class="com.dao.inherit.joinTable.Person2"/> 
-			<mapping class="com.dao.inherit.joinTable.EmployeeDetails2"/>
-			 <mapping class="com.dao.inherit.joinTable.Student2"/> 
-			
+		
+	<mapping class="com.dao.composition.PersonWithAddress" />
+		
+		<mapping class="com.mnp.oneToOne.EmployeeWithAddress" />
+		<mapping class="com.mnp.oneToOne.AddressDetails" />
+		<mapping class="com.mnp.inherit.onetomany.Customer" />
+		<mapping class="com.mnp.inherit.onetomany.Accounts" />
 	
-		<!--
+		
+			
+		
+		<mapping class="com.dao.composition.StudentWithAddress" />
 		
 		
-				
-		<mapping class="com.mnp.inherit.manytomany.Student" />
-		<mapping class="com.mnp.inherit.manytomany.Cource" />
 	
-
-
+		
 		
 		<mapping class="com.inherit.User" />
 		<mapping class="com.inherit.Activity" />
-		 
 			
-			
+							
 			<mapping class="setup.MyEmployee"/> -->
 
 		<!-- <mapping class="selfJoin.EmpWithManager"/> 
@@ -74,6 +80,3 @@
 			<mapping class="com.mnp.inherit.onetomany2.Customer1"/> 
 			<mapping class="com.mnp.inherit.onetomany2.Accounts1"/> -->
 
-
-	</session-factory>
-</hibernate-configuration>

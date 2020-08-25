@@ -1,0 +1,24 @@
+1.Load the driver jar class
+2.Create connection object
+3.create statement obj
+//statement obj is used to execute queries (insert/update/delete/read)
+call executeUpdate() method for -->insert/update/delete
+call executeQuery() method for --> select staements
+4.Create ResultSet obj only for Read queries
+5.close connection , statement, resultset
+
+
+
+Write a program to perform
+1.Insert
+2.update by id
+3.delete by id, delete by name
+4.Read all    ---> return List of Employee objects
+5.read by id   --> return Employee obj(keep the row data inside the employee obj)
+6.read by name   ---> return Employee obj
+7.exit
+
+Table is employee , I need employee.java (id,name,salary)
+Table is visitor , I need Visitor.java (id,name,salary,city)
+  
+  

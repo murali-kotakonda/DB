@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javassist.expr.NewArray;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -31,7 +30,8 @@ public class Customer implements Serializable {
 	@Column(name = "age", nullable = false)
 	private int age;
 	
-	@OneToMany(cascade= CascadeType.ALL , fetch= FetchType.LAZY , mappedBy="customer")
+	@OneToMany(cascade= CascadeType.ALL , fetch= FetchType.LAZY , 
+			mappedBy="customer")
 	private List<Accounts> accounts;
 	
 	public List<Accounts> getAccounts() {

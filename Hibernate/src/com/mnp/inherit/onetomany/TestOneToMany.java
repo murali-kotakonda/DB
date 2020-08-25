@@ -1,5 +1,6 @@
 package com.mnp.inherit.onetomany;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -14,8 +15,8 @@ public class TestOneToMany {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//insertCust();
-		readCust();
+		insertCust();
+		//readCust();
 	}
 
 	private static void insertCust() {
@@ -23,29 +24,22 @@ public class TestOneToMany {
 		Session s = HibernateUtil.getSessionFactory().openSession();
 		s.getTransaction().begin();
 
-		Customer cust1 = new Customer("muralidhar", 25);
-		List<Accounts> accounts = cust1.getAccounts();
-		Accounts a1 = new Accounts("savings", "muralidhar savings desc", cust1);
-		Accounts a2 = new Accounts("current", "muralidhar vcurrent desc", cust1);
-		Accounts a3 = new Accounts("loan", "muralidhar loan desc", cust1);
+		Customer cust1 = new Customer("John", 25);
+		Accounts a1 = new Accounts("savings", "John savings desc", cust1);
+		Accounts a2 = new Accounts("current", "John vcurrent desc", cust1);
+		Accounts a3 = new Accounts("loan", "John loan desc", cust1);
 
 		//add accounts
+		List<Accounts> accounts = new ArrayList<Accounts>();
 		accounts.add(a1);
 		accounts.add(a2);
 		accounts.add(a3);
 
+		cust1.setAccounts(accounts);
 		s.save(cust1);
 
 		s.getTransaction().commit();
 		s.close();
-
-		/*
-		 * Customer cust2= new Customer("user2",25); cust2.getAccounts().add(new
-		 * Accounts("loan", "loan desc",cust2)); cust2.getAccounts().add(new
-		 * Accounts("credit", "loan desc",cust2));
-		 */
-		// s.save(cust2);
-
 	}
 
 	private static void readCust() {
@@ -59,7 +53,6 @@ public class TestOneToMany {
 		for (Accounts acc : accounts) {
 			System.out.println(acc);
 		}
-
 	}
 
 }

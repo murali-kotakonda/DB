@@ -2,20 +2,29 @@ package com.dao;
 
 import java.util.Scanner;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 public class TestUpdateEmployee {
 	public static void main(String[] args) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+
+		// 3.read inputs
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter name::");
+		String name = sc.next();
+
+		System.out.println("Enter sal::");
+		int sal = sc.nextInt();
 
 		// create emp obj
-		String name = "krishna2";
-		int id = 67;
-		Employee emp = new Employee(id, name);
-		
-		
-		//perform update operation
+		System.out.println("enter id");
+		int id = sc.nextInt();
+
+		Employee emp = new Employee(id, name, sal);
+
+		// perform update operation
 		session.getTransaction().begin();
 		session.update(emp); // merge will update only if the state is changed
 		session.getTransaction().commit();

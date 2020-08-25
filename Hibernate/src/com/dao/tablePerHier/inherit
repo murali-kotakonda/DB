@@ -1,0 +1,100 @@
+Table per hierarchy:
+----------------------
+One table for the all the inheritence classes.
+
+
+save person obj ---> 1 row created in Profile table
+save student obj ---> 1 row created in Profile table
+save employee obj ---> 1 row created in Profile table
+
+
+
+Profile:
+---------
+id    name    age  semid   branchid  projid   deptid   type
+100   user1   23   null    null      null     null     person     ---> Person
+200   user2   19   3       CSC       null     null     student    ---> Student 
+300   user3   32   null    null      1221     876      employee   ---> Employee
+
+
+
+Add additional column : "TYPE"  
+Allowed values are : "person" or "student"  or "employee" 
+TYPE is a discriminatory column
+
+for type (discriminatory) we need to add new annotation
+@DiscriminatorColumn
+
+Get all students:
+----------------
+select * from profile where type = 'student'
+
+
+
+
+ 
+ 
+ 
+ 
+
+Person.java:
+--------
+id
+name
+age
+
+Student.java:
+----------
+Student  extends Person
+semid
+branchid
+
+Employee.java
+--------------
+Employee extends Person
+projid
+deptid
+
+
+
+Map the Inheritenc classes to the db tables.
+3 approaches:
+  -> Table per hierarchy   -> All the 3 entities class has same table
+  -> Table per class       -> Every class has seperate table
+  -> Table per subclass    -> Normalization with every table having seperate class
+  
+  
+ 
+ Table per hierarchy:
+  -------------------
+  
+  1.create person obj , emp obj , student obj
+  2. save person  -> 1 row in profile
+  3. save emp     -> 1 row in profile
+  4. save stu     -> 1 row in profile
+  
+  
+  
+  
+  
+  
+  
+Table per class:
+------------------------
+Person info is saved in personDetails1 table
+studnet info is saved in student1  table
+employee info is saved in employeeDetails1 table
+
+
+Person is parent
+student & employee are child classes
+
+
+personDetails1 table has userid,name,age
+
+student1 table has userid,name,age, branchid,semid
+
+employeeDetails1 table has userid,name,age,deptid, projid
+
+
+

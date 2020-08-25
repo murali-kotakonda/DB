@@ -7,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -26,8 +27,14 @@ public class EmployeeWithAddress {
 	private int age;
 
 	@OneToOne(cascade=CascadeType.ALL,fetch= FetchType.LAZY)
+	@JoinColumn(name = "curAddId")
 	private AddressDetails curAddress;
-	 
+	
+	@Override
+	public String toString() {
+		return "EmployeeWithAddress [id=" + id + ", name=" + name + ", age=" + age ;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -59,6 +66,4 @@ public class EmployeeWithAddress {
 	public void setCurAddress(AddressDetails curAddress) {
 		this.curAddress = curAddress;
 	}
-
-
 }

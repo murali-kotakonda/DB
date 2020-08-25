@@ -1,63 +1,76 @@
 package com.mnp.oneToOne;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 import com.dao.HibernateUtil;
 
 public class TestInsertEmpWithAddress {
 	public static void main(String[] args) {
-		withoutCascadePersist();
-		// withCascadePersist();
+		//withoutCascadePersist();
+		withCascadePersist();
 	}
 
-	private static void withCascadePersist() {
-		// cascade value is all, persist
+	private static void withCascadePersist() {//create session factory
+		SessionFactory sf = 	 new Configuration().configure().buildSessionFactory();
+
+		//create session obj
+		Session s = sf.openSession();
+		
+		// create address obj with data
+		AddressDetails add = new AddressDetails();
+		add.setCity("Hyd");
+		add.setCountry("INDIA");
+		add.setPin(123456);
+		add.setState("TS1");
+		add.setStreetNo("YUSAF GUDA12");
+		
+	 	// create emp obj with data
 		EmployeeWithAddress emp = new EmployeeWithAddress();
-		emp.setAge(28);
-		emp.setName("RAMANA");
+		emp.setAge(34);
+		emp.setName("krishna kumar12");
 
-		AddressDetails address = new AddressDetails();
-		address.setCity("bang");
-		address.setCountry("IN");
-		address.setPin(12345);
-		address.setState("KA");
-		address.setStreetNo("MARATHAHLLI tulasi theatre road");
+		// keep address obj inside emp
+		emp.setCurAddress(add);
 
-		// set relatn between emp obj and address obj
-		emp.setCurAddress(address);
-
-		Session s = HibernateUtil.getSessionFactory().openSession();
+		//save employee obj
 		s.getTransaction().begin();
-		s.save(emp);
+		s.save(emp);  //1 row created in employee table  + 1 row is inserted in address table
 		s.getTransaction().commit();
-		s.close();
-	}
+
+		s.close();}
 
 	private static void withoutCascadePersist() {
-		// SAVE THE ADDRESS OBJ
+
+		//create session factory
+		SessionFactory sf = 	 new Configuration().configure().buildSessionFactory();
+
+		//create session obj
+		Session s = sf.openSession();
+		
+		// create address obj with data
 		AddressDetails add = new AddressDetails();
 		add.setCity("Hyd");
 		add.setCountry("IN");
 		add.setPin(12345);
-		add.setState("UP");
-		add.setStreetNo("asrsf");
-
-		Session s = HibernateUtil.getSessionFactory().openSession();
-
-		// SAVE ADDR DATA
+		add.setState("TS");
+		add.setStreetNo("YUSAF GUDA");
+		
+		// save the address obj
 		s.getTransaction().begin();
 		s.save(add);
 		s.getTransaction().commit();
 
-		// cascade value is anyother other than all, persist
 		// create emp obj with data
 		EmployeeWithAddress emp = new EmployeeWithAddress();
-		emp.setAge(28);
-		emp.setName("muralidhar");
+		emp.setAge(34);
+		emp.setName("krishna kumar");
 
-		// SET RELATNSHIP
+		// keep address obj inside emp
 		emp.setCurAddress(add);
 
+		//save employee obj
 		s.getTransaction().begin();
 		s.save(emp);
 		s.getTransaction().commit();

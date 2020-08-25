@@ -38,9 +38,10 @@ public class EmpWithManager {
 
 	@OneToMany(mappedBy="manager",fetch=FetchType.LAZY)
    //@OrderBy("firstname")
-	private Set<EmpWithManager> subordinates =
-	new HashSet<EmpWithManager>();
+	private Set<EmpWithManager> subordinates =new HashSet<EmpWithManager>();
 
+	
+	
 	public EmpWithManager() {
 	}
 

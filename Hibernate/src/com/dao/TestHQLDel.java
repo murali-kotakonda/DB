@@ -4,15 +4,19 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+//delete emp by id
+//delete emp by name
+
+
 public class TestHQLDel {
 
 	public static void main(String[] args) {
 		Session  sObj = HibernateUtil.getSessionFactory().openSession();
-		String name ="user10";
+		String name ="krishna3";
 		Transaction transaction = sObj.getTransaction();
 		
 		transaction.begin();
-		Query  q = sObj.createQuery("delete from Employee where userName=:myName");
+	Query  q = sObj.createQuery("delete from Employee where userName=:myName");
 		q.setParameter("myName", name);
 		int res = q.executeUpdate();
 		transaction.commit();

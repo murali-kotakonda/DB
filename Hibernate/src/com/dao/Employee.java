@@ -13,18 +13,14 @@ import javax.persistence.Table;
 @NamedQueries(
 		value =
 {
- @NamedQuery(name =Employee.GET_EMP_NAMES,query = "select userName from Employee"),
- @NamedQuery(name =Employee.GET_All_EMPS,query = "from Employee"),
+ @NamedQuery(name ="getEmpNames",query = "select userName from Employee"),
+ @NamedQuery(name ="getALLEmps",query = "from Employee"),
  @NamedQuery(name ="empSal",query = "select usersalary from Employee")
 }
 )
 @Entity
 @Table(name = "EmployeeDetails")
 public class Employee {
-
-	public static final String GET_EMP_NAMES ="getEmpNames";
-	public static final String GET_All_EMPS ="getALLEmps";
-	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

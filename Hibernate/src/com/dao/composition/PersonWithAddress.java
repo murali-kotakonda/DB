@@ -1,7 +1,5 @@
 package com.dao.composition;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -72,6 +70,11 @@ public class PersonWithAddress {
 		this.curAddress = curAddress;
 	}
 
+	@Override
+	public String toString() {
+		return "PersonWithAddress [id=" + id + ", name=" + name + ", age=" + age + ", curAddress=" + curAddress + "]";
+	}
+
 	/*public Address getPerAddress() {
 		return perAddress;
 	}
@@ -80,4 +83,6 @@ public class PersonWithAddress {
 		this.perAddress = perAddress;
 	}
 */
+	
+	
 }

@@ -42,7 +42,6 @@ public class TestOneToMany {
 		 System.out.println(accounts);
 		s1.close();
 		
-		
 	}
 
 }
