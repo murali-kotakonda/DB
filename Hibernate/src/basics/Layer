@@ -1,0 +1,86 @@
+Project is developed in layers [layers architecture ]
+--------------------------------------------------
+
+1.UI layer(                     -  [web pages  ]
+2.UI handler/Presentation layer -  [ broker for ui ]     
+3.Service layer                 -  [ Business related code , transactn , busines validation..etc... ]
+4.Integration layer (optional) - [ broker for external 3rd party ]   
+5.DAO layer                    -  [ broker for database ]
+6.DB layer                     - [ data management]
+
+
+UI layer: [ web pages design ]
+--------------------------------------------
+Role: web development 
+tech : html, css, java script , angular js , jsps
+who : web developers / java developers
+
+
+Backend : Presentation layer +  Service layer +  DAO layer + DB layer
+Front End : UI layer
+
+UI layer  ---> UI handler/Presentation layer -->Service layer --->DAO layer -->DB layer
+          <---                              <---             <---          <---         
+
+DB layer: [Database for permanent storage of data]
+-----------------------------------------------------
+Role:  maiantain the applciation data using Tables
+tech : Oracel or mysql or sqlserver
+who :  DB developers
+
+
+
+UI handler/Presentation layer: [Java code] 
+-------------------------------
+Role:  Request capturing, validation , request deligation to next layer , reponse preparation
+acts as a interactn between web pages and java
+tech :  servlets  or struts or springs mvc or wicket
+who :  Java developers
+
+
+
+DAO layer: [Java code] 
+--------------------
+Role:  For performing the database opeartions Create,Read,Update,Delete
+acts as a interactn between database and java
+tech :   JDBC OR Hibernate or Springs JDBC or JPA or eclipselink or Toplink or Ibatics
+who :  Java developers
+
+
+Integration layer [Java code] 
+----------------------------
+Role:   Write code for communcation between exeternal apps to our applciation.
+acts as a interactn between  external application/services/3rd party and java
+tech :   webservices [Rest or soap ] 
+who :  Java developers
+
+Service layer
+--------------
+Role:   write business related code 
+tech :  EJB or springs [core, DI ]
+who :  Java developers
+
+
+Learn:
+---------
+UI layer  -> html, jsp , angular js
+
+UI handler/Presentation layer -> springs mvc , springs rest/microservice
+Service layer --> springs 
+Integration layer -> RestClient API
+DAO layer -> Spring JDBC , Hibernate
+
+DB layer  -> Oracle
+
+order:
+Hibernate
+springs
+spring jdbc
+springs mvc
+spring boot + microservice
+RestClient API
+
+
+
+
+
