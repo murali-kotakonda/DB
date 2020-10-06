@@ -1,18 +1,25 @@
 setup:
 -----------
-1.create project and import the hibernate jars
-2.create the hibernate.xml (for configuration)
+1.create a project and import the hibernate jars
+3.create the hibernate.xml under src/main/java and provide configuration for
   - db configuration (username, password, connection string)
-  - hib configuration( entity classes , )
-3.create the entity classes.
-   (for every table there is a java class. that java class is termed as entity class)
+  - hib configuration( entity classes )
+
+3.Create the entity classes.
+   
+ (for every table there is a java class. that java class is termed as entity class)
+ 
+ DB layer:
+ -------------------
   Table : VisitorDetails
   table columns: id, name,city, salary
   row : contains data
   
   java:
   use annotation inside the entity class.
-    
+  
+  Visitor.java:
+  ------------------  
   @Entity
   @Table(name = "VisitorDetails")  // table name , Vistor class is associated with VisitorDetails table.
   public class Visitor{
@@ -33,7 +40,20 @@ setup:
     
   }
   
+     
+ How to establish the mapping between the table and entity class?
+ SOlution:
+ use hibernate annotations
+  @Table - for mapping the table name and class name
+  @Column - for mapping the column and instance variable
   
+WE NEED TO REGISTER EVERY ENTITY CLASS INSIDE hibernate.cfg.cml
+
+-how to configure entity class inside hibernate.cfg.xml?
+ add the tag inside the xml:
+ ex: <mapping class="<packgaeName>.<className>" />
+<mapping class="Basics.Visitor" />
+
   
 Objects we need from hibernate:
 --------------------------------
@@ -42,5 +62,7 @@ Objects we need from hibernate:
   3.transaction (required only for insert/update/delete)
   4.Query (used for update/delete/read queries)
   5.Criteria (used for read queries)
+  
+  
   
   

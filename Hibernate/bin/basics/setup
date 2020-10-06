@@ -1,9 +1,9 @@
 setup:
 -----------
-1.create project and import the hibernate jars
-2.create the hibernate.xml (for configuration)
+1.create a project and import the hibernate jars
+3.create the hibernate.xml under src/main/java and provide configuration for
   - db configuration (username, password, connection string)
-  - hib configuration( entity classes , )
+  - hib configuration( entity classes )
 3.create the entity classes.
    (for every table there is a java class. that java class is termed as entity class)
   Table : VisitorDetails

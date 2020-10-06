@@ -1,0 +1,20 @@
+How to create tables automatically?
+------------------------------------------
+solution:
+<property name="hbm2ddl.auto">create</property>
+
+But this option will delete and create the tables every time.
+
+so chnage the value to "update" after tables are created.
+
+
+How to insert a row in EmployeeDetails TABLE:
+-----------------------------------------------
+1.create sf obj
+2.crate session obj
+3.create entity obj with data
+4.open txn  [create transaction obj ]
+5.call session.save() method by pasisng employee object
+6.commit transaction
+7.close session
+

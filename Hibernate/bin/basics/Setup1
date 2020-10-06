@@ -1,0 +1,117 @@
+maven:
+--------
+- build tool
+- helps to download and import the external jars
+- for working with maven we need maven software (available with eclipse)  
+- in project we need to modify pom.xml if any external jars is required .
+
+
+
+Hib setup:
+----------------
+1.create the maven project 
+Type groupId : Regnant
+Type artifactId : Hibernate
+Finish
+
+check project is created with pom.xml
+
+2.Update pom.xml 
+- add the dependencies for hibernate 
+- add the dependencies for oracle driver 
+
+pom.xml:
+------------
+
+ 
+  <dependencies>
+	
+  <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>5.2.9.Final</version>
+  </dependency>
+  
+  <dependency>
+    <groupId>com.oracle</groupId>
+    <artifactId>ojdbc14</artifactId>
+    <version>10.2.0.4.0</version>
+</dependency>
+
+
+  </dependencies>
+
+3.create the hibernate.cfg.xml under src/main/java and provide configuration for
+  - db configuration (username, password, connection string)
+  - hib configuration( entity classes )
+
+
+hibernate.cfg.xml :
+-------------------------------------------------------------------
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	
+	
+	<session-factory>
+	
+  <!-- Database connection settings -->
+		<property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+		<property name="connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
+		<property name="connection.username">scott</property>
+		<property name="connection.password">oracle</property>
+		<property name="connection.pool_size">1</property>
+    
+    
+    <!-- hib config -->
+		<!-- SQL dialect specifies the database -->
+		<property name="dialect">org.hibernate.dialect.Oracle10gDialect</property>
+
+		<!-- Show all executed SQL to stdout -->
+		<property name="show_sql">true</property>
+
+		<!-- Drop and re-create the database schema on startup -->
+		<property name="hbm2ddl.auto">create</property>
+    
+	</session-factory>
+	
+	
+	
+	
+</hibernate-configuration>
+		
+		
+
+
+
+
+
+ Hibernate components:
+ ------------------------
+ 1.SessionFactory -> 1 time creation for entire application
+ 2.Session     -> every time for every transaction
+                -> For CRUD operations
+ 3.Query with HQL-> CRUD operations
+ 4.Criteria   -> Mostly for dynamic Read operations
+ 5.Transaction -> txn managemnet
+ 6.Caching  -> to reduce load and improve perf
+ 
+ 
+ 1.How to create session factory obj?
+---------------------------------------------------------------
+SessionFactory sf = new Configuration().configure().buildSessionFactory(); 
+
+2.How to create session obj?
+---------------------------------------------------
+Session session = sf.openSession();
+
+
+3.How to close the session obj?
+-------------------------------------
+session.close();
+ 
+ 
+ 

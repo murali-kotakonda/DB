@@ -25,7 +25,7 @@ public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "userId")
-	private int Id;
+	private int id;
 
 	@Column(name = "name", nullable = false, length = 30, unique = true)
 	private String userName;
@@ -35,16 +35,16 @@ public class Employee {
 	
 	@Override
 	public String toString() {
-		return "Employee [Id=" + Id + ", userName=" + userName
+		return "Employee [Id=" + id + ", userName=" + userName
 				+ ", usersalary=" + usersalary + "]";
 	}
 
 	public int getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(int id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public Integer getUsersalary() {
@@ -57,11 +57,7 @@ public class Employee {
 		return userName;
 	}
 	
-	public Employee(int id, String userName) {
-		super();
-		Id = id;
-		this.userName = userName;
-	}
+	
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
@@ -69,9 +65,16 @@ public class Employee {
 	public Employee() {
 		super();
 	}
+	
+	public Employee(int id, String userName) {
+		super();
+		this.id = id;
+		this.userName = userName;
+	}
+	
 	public Employee(int id, String userName, int usersalary) {
 		super();
-		Id = id;
+		this.id = id;
 		this.userName = userName;
 		this.usersalary = usersalary;
 	}
