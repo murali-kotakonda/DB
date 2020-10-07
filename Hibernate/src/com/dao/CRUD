@@ -5,7 +5,7 @@ solution:
 
 But this option will delete and create the tables every time.
 
-so chnage the value to "update" after tables are created.
+so change the value to "update" after tables are created.
 
 
 How to insert a row in EmployeeDetails TABLE:
