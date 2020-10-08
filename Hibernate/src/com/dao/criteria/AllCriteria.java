@@ -1,4 +1,4 @@
-package com.dao;
+package com.dao.criteria;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,6 +10,9 @@ import org.hibernate.criterion.LogicalExpression;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+
+import com.dao.Employee;
+import com.dao.HibernateUtil;
 
 public class AllCriteria {
 	public static void main(String[] args) {

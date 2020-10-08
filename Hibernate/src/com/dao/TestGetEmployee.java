@@ -8,7 +8,6 @@ import org.hibernate.SessionFactory;
 public class TestGetEmployee {
 	
 	public static void main(String[] args) {
-			// 1 +2 
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 			Session session = sessionFactory.openSession();
 		
@@ -17,18 +16,22 @@ public class TestGetEmployee {
 			System.out.println("Enter id::");
 			int id =sc.nextInt();
 
-			//approach 1get employee whose primary key id value = id
-			Employee emp = (Employee) session.load(Employee.class, id);
+			//approach get employee whose primary key id value = id
+			Employee emp = (Employee) session.get(Employee.class, id);
 			if(emp==null){
 		        System.out.println("invalid id");
 		      }else{
-		      System.out.println(emp);  
-		      }
+		      System.out.println(emp.getId());  
+		      System.out.println(emp.getUserName());
+		      System.out.println(emp.getUsersalary());
+		    }
 			
-			//approach 2
+	}
+}
+
+
+/*
 			Employee emp1 = (Employee) session.get(Employee.class, id);
 			System.out.println(emp1);
 			
-			session.close();
-	}
-}
+ * */

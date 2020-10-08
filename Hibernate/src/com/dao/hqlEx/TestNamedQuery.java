@@ -1,9 +1,12 @@
-package com.dao;
+package com.dao.hqlEx;
 
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+
+import com.dao.Employee;
+import com.dao.HibernateUtil;
 
 public class TestNamedQuery {
 
@@ -33,16 +36,18 @@ public class TestNamedQuery {
 		s.close();
 		
 		
-		
-		
-Session s = HibernateUtil.getSessionFactory().openSession();
-		
-		//Query listEmps = s.createQuery(" from Employee");
-		Query listEmps = s.getNamedQuery("getALLEmps");
-		List<Employee> emps = (List<Employee>)listEmps.list();
-		for (Employee emp: emps) {
-			System.out.println(emp);
-		}
-		s.close();
+		getNamed3();
+	}
+
+	private static void getNamed3() {
+		Session s = HibernateUtil.getSessionFactory().openSession();
+				
+				//Query listEmps = s.createQuery(" from Employee");
+				Query listEmps = s.getNamedQuery("getALLEmps");
+				List<Employee> emps = (List<Employee>)listEmps.list();
+				for (Employee emp: emps) {
+					System.out.println(emp);
+				}
+				s.close();
 	}
 }

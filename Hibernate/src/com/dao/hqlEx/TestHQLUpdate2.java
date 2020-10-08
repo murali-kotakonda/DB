@@ -1,4 +1,4 @@
-package com.dao;
+package com.dao.hqlEx;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -6,8 +6,10 @@ import org.hibernate.Transaction;
 //update name of employee based on id
 //update salary of every employee; add 5000 for every employee
 
-public class TestHQLUpdate {
-	// 	assignment : give hike of 5000 fro every employee
+import com.dao.HibernateUtil;
+
+public class TestHQLUpdate2 {
+	// 	assignment : update employee salary 
 	public static void main(String[] args) {
 		Session  sObj = HibernateUtil.getSessionFactory().openSession();
 		int id =22;
@@ -15,10 +17,9 @@ public class TestHQLUpdate {
 		Transaction transaction = sObj.getTransaction();
 		
 		transaction.begin();
-		//Query  q = sObj.createQuery("update Employee set usersalary=:mySal where id=:myId");
-		Query  q = sObj.createQuery("update Employee set usersalary=usersalary+500 ");
-		//q.setParameter("myId", id);
-		//q.setParameter("mySal", sal);
+		Query  q = sObj.createQuery("update Employee set usersalary=:mySal where id=:myId");
+		q.setParameter("myId", id);
+		q.setParameter("mySal", sal);
 		int rowsAffected = q.executeUpdate();
 		transaction.commit();
 		

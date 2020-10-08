@@ -1,10 +1,13 @@
-package com.dao;
+package com.dao.criteria;
 
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+
+import com.dao.Employee;
+import com.dao.HibernateUtil;
 
 public class TestCriteriaMinMax {
 	public static void main(String[] args) {

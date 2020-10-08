@@ -25,7 +25,6 @@ lets push every 100 rows
 	transaction.rollback();  -> in catch block if there is an exception then dont insert any row
   transaction.commit();   -> in try block , if there is no exception then insert all 5000 rows.
   
-  
 
  */
 public class TestBulkInsertEmployee {

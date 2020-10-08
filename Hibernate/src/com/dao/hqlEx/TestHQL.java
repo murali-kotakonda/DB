@@ -1,4 +1,4 @@
-package com.dao;
+package com.dao.hqlEx;
 
 import java.util.List;
 
@@ -9,21 +9,29 @@ import org.hibernate.Session;
 //get all sal
 //get all names
 
+import com.dao.Employee;
+import com.dao.HibernateUtil;
+
 public class TestHQL {
 	public static void main(String[] args) {
 		
 		Session sessionObj = HibernateUtil.getSessionFactory().openSession();
 		//getAllEmps();
 		//getAllEmpNames();
-		//getAllSals();
+		getAllSals();
 		//getNameById();
 		 //printEmpsBysal();
-		printMaxSal();
+		//printMaxSal();
 		//printNameAndSalById();
 		//printAllNamesAndSal();
 		sessionObj.close();
 	}
 	
+	/**
+	 Req :   get all employees from EmployeeDetails table
+	 HQL :from Employee
+	 use q.list()  
+	 */
 	private static void getAllEmps() {
 
 		// get all employees in table
@@ -41,15 +49,16 @@ public class TestHQL {
 			System.out.println(e);
 		}
 
-		// close session
-		sessionObj.close();
-
 	}
 	
+	/**
+	 Req :   get all employee names from EmployeeDetails table
+	 HQL :select userName from Employee
+	 use q.list()  
+	 */
 	
 	private static void getAllEmpNames() {
 		Session sessionObj = HibernateUtil.getSessionFactory().openSession();
-		// get all names from employeee
 		Query query = sessionObj.createQuery("select userName from Employee");
 		List<String> names = query.list();
 		for (String name : names) {
@@ -59,6 +68,11 @@ public class TestHQL {
 	}
 	
 	
+	/**
+	 Req :   get all employee salaries from EmployeeDetails table
+	 HQL :select usersalary from Employee
+	 use q.list()  
+	 */
 	private static void getAllSals() {
 		Session sessionObj = HibernateUtil.getSessionFactory().openSession();
 		// get all names from employeee
@@ -69,6 +83,7 @@ public class TestHQL {
 		}
 		sessionObj.close();
 	}
+	
 	
 	private static void getEmpById() {
 		// get name for a given empid
@@ -122,7 +137,7 @@ the return type of uniqueResult() method is integer
 		 */
 	}
 
-	private static void getNameById2() {
+	public static void getNameById2() {
 		// get name for a given empid
 		Session sessionObj = HibernateUtil.getSessionFactory().openSession();
 		int id = 181;
@@ -233,9 +248,4 @@ the return type of uniqueResult() method is integer
   			where objec[0] contains name
   			object[1] contain ssalary
 		 */
-	
-	
-	
-	
-	
 }

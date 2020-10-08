@@ -1,8 +1,10 @@
-package com.dao;
+package com.dao.hqlEx;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
+import com.dao.HibernateUtil;
 
 //delete emp by id
 //delete emp by name

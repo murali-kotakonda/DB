@@ -86,6 +86,57 @@ hibernate.cfg.xml :
 		
 
 
+ 
+ 3.Create the entity classes.
+   
+ (for every table there is a java class. that java class is termed as entity class)
+ 
+ DB layer:
+ -------------------
+  Table : VisitorDetails
+  table columns: id, name,city, salary
+  row : contains data
+  
+  java:
+  use annotation inside the entity class.
+  
+  Visitor.java:
+  ------------------  
+  @Entity
+  @Table(name = "VisitorDetails")  // table name , Vistor class is associated with VisitorDetails table.
+  public class Visitor{
+    
+    @Column(name="id") //db column name
+    private int myId;
+    
+    @Column(name="name") //db column name
+    private String myName;
+    
+    @Column(name="city") //db column name
+    private String myCity;
+    
+    @Column(name="salary") //db column name
+    private int userSalary;
+    
+    //setters and getters
+    
+  }
+  
+     
+ How to establish the mapping between the table and entity class?
+ SOlution:
+ use hibernate annotations
+  @Table - for mapping the table name and class name
+  @Column - for mapping the column and instance variable
+  
+WE NEED TO REGISTER EVERY ENTITY CLASS INSIDE hibernate.cfg.cml
+
+-how to configure entity class inside hibernate.cfg.xml?
+ add the tag inside the xml:
+ ex: <mapping class="<packgaeName>.<className>" />
+<mapping class="Basics.Visitor" />
+
+  
 
 
 
@@ -114,4 +165,5 @@ Session session = sf.openSession();
 session.close();
  
  
+  
  

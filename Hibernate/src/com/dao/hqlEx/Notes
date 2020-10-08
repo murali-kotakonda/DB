@@ -1,0 +1,43 @@
+summary:
+------------------
+save() -> for insert a row
+update() - for updating a row
+delete() - for deleting a row
+get()/load() - for reading a row
+
+single row and all columns and based on primary key
+
+
+update():
+-update() method works based  on the id(primary key) ; 
+update based on name,sal is not possible.
+-updates only single row. multiple row updation is not possible.
+- updates every column ; only particular column updation is not possible.  
+  
+  
+  
+  
+delete():
+-delete() method works based  on the id(primary key) ; 
+delete based on name,sal is not possible.
+-deletes only single row. multiple row deletion is not possible.
+-
+  
+  
+  
+  
+  
+get()/load():
+-get()/load()  method works based  on the id(primary key) ; 
+read based on name,sal is not possible.
+- reads only single row. multiple row retrival is not possible.
+- reads every column , retriving selected column is not possible
+
+
+Solution:
+Use HQL  [Hiberante Query Language ]
+HQL is independent of the database.
+using HQL we can execute any query.
+Need Query Object to work on HQL
+
+

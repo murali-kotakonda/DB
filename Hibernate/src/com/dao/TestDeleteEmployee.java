@@ -9,17 +9,32 @@ public class TestDeleteEmployee {
 		Session session = sessionFactory.openSession();
 
 		// create emp obj
-		String name = "xyz";
-		int id = 461;
-		Employee emp = new Employee(id, name);
+		String name = "testuser10";
+		int id = 10;
+		Employee emp = new Employee();
+		emp.setId(id);
+		emp.setUserName(name);
 		
 		//perform update operation
 		session.getTransaction().begin();
-		session.delete(emp);// update only if it is chnaged
+		session.delete(emp);// delete the row based on id
 		session.getTransaction().commit();
 		session.close();
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
  * Query updateQuery = s.createQuery(

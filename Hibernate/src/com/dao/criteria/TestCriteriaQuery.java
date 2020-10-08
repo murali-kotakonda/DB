@@ -1,9 +1,12 @@
-package com.dao;
+package com.dao.criteria;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+
+import com.dao.Employee;
+import com.dao.HibernateUtil;
 public class TestCriteriaQuery {
 	public static void main(String[] args) {
 		Session s = HibernateUtil.getSessionFactory().openSession();

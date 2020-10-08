@@ -18,3 +18,34 @@ How to insert a row in EmployeeDetails TABLE:
 6.commit transaction
 7.close session
 
+
+How to update a row in EmployeeDetails TABLE:
+-----------------------------------------------
+1.create sf obj
+2.crate session obj
+3.create entity obj with data
+4.open txn  [create transaction obj ]
+5.call session.update() method by pasisng employee object
+6.commit transaction
+7.close session
+
+
+How to delete a row in EmployeeDetails TABLE:
+-----------------------------------------------
+1.create sf obj
+2.crate session obj
+3.create entity obj with data
+4.open txn  [create transaction obj ]
+5.call session.delete() method by pasisng employee object
+6.commit transaction
+7.close session
+
+
+How to RETRIVE a row from EmployeeDetails TABLE using primary key id
+------------------------------------------------------------------------
+1.create sf obj
+2.crate session obj
+3.call session.get() method  or session.load() method  by pasisng className , primary key id.
+This method will retunr the employee object
+4.close session
+

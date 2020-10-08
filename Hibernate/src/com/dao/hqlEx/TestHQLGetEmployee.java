@@ -1,10 +1,13 @@
-package com.dao;
+package com.dao.hqlEx;
 
 import java.util.List;
 import java.util.Scanner;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+
+import com.dao.Employee;
+import com.dao.HibernateUtil;
 
 public class TestHQLGetEmployee {
 	

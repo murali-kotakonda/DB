@@ -1,0 +1,78 @@
+Table : EmployeeDetails
+columns:  userId , name , salaryInfo
+
+Java Entity class:Employee
+instance variables : id ,userName , usersalary
+
+
+
+SQL : write using column names + table name
+HQL : write using instance variable + class name (replace column name with instance variable + replace table with class name)
+  
+@Entity
+@Table(name = "EmployeeDetails")
+public class Employee {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "userId")
+	private int id;
+
+	@Column(name = "name", nullable = false, length = 30, unique = true)
+	private String userName;
+
+	@Column(name = "salaryInfo", nullable = true)
+	private Integer usersalary;
+	
+}
+
+
+Java ---HQL---> Hibernate --- SQL --> DB
+
+
+Java dev needs to write HQL and pass to hiberante
+Hibernate converts the HQL to SQL depends on DB.
+
+HQL will work on any database.
+in future if the database is changed no need to change the HQL.
+
+
+-- Get all Rows
+SQL: SELECT * FROM EmployeeDetails;
+HQL : From Employee
+
+-- Get userid and name for all employees
+SQL: SELECT userId,name FROM EmployeeDetails
+HQL: SELECT Id,userName FROM Employee
+
+-- Get Salary and name whose id is 5000
+SQL:  SELECT name,salaryInfo FROM EmployeeDetails WHERE userId=5000
+HQL:  SELECT userName,usersalary FROM Employee WHERE Id=5000
+
+-- update employee name   using emp id
+SQL : Update EmployeeDetails set name ='tet12222' where userId=5000
+HQL :  Update Employee set userName ='tet12222' where Id=5000
+  
+-- delete based on employee name
+SQL : Delete from  EmployeeDetails  WHERE name='raj'
+HQL : Delete from  Employee WHERE userName='raj'
+
+  
+Steps:
+------
+
+  Steps:
+1.create session factory
+2.create session
+3.create query obj using hql 
+Query  q = session.createQuery("<any hql>");
+
+4.
+A)for insert/update/delete ----> need trasaction object + q.executeUpdate()
+B)For select ----> 
+     1.single row    : q.uniqueResult()
+     2.multiple row :  q.list()
+       
+         
+  
+  
