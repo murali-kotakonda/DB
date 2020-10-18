@@ -1,6 +1,7 @@
 package com.dao.hqlEx;
 
 import java.util.List;
+import java.util.Scanner;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -18,11 +19,15 @@ public class TestHQL {
 		Session sessionObj = HibernateUtil.getSessionFactory().openSession();
 		//getAllEmps();
 		//getAllEmpNames();
-		getAllSals();
+		//getAllSals();
+		//getEmpById() ;
+		// getEmpById1();
 		//getNameById();
 		 //printEmpsBysal();
 		//printMaxSal();
 		//printNameAndSalById();
+		printAllNameAndSalNewwwwww();
+		
 		//printAllNamesAndSal();
 		sessionObj.close();
 	}
@@ -84,27 +89,54 @@ public class TestHQL {
 		sessionObj.close();
 	}
 	
-	
+	/**
+	 Req :   get employee by id = 60 
+	 HQL :   from Employee where Id=60
+	   use query.uniqueResult()
+	 */
 	private static void getEmpById() {
-		// get name for a given empid
 		Session sessionObj = HibernateUtil.getSessionFactory().openSession();
 		Query query = sessionObj
-				.createQuery(" from Employee where Id=60");
+				.createQuery(" from Employee where id=50");
 		Employee emp = (Employee) query.uniqueResult();
 		System.out.println(emp);
-		sessionObj.close();
 	}
+	/**
+	 Req :   get employee by taking id as input
+	 HQL :   from Employee where Id=inputid
+	   use query.uniqueResult()
+	   
+	    //dont provide input ; provide using the place holders : use this appraoch to avoid sql injection
+  Query query = sessionObj
+				.createQuery(" from Employee where Id=:inputEmpId");
+		query.setParameter("inputEmpId", id);
+		
+   
+   //provide input directly to query   : Dont use this approach as this can lead to sql injection
+		Query query1 = sessionObj
+				.createQuery(" from Employee where Id="+id);
+       
+	 */
+       
 	private static void getEmpById1() {
 		// get name for a given empid
 		Session sessionObj = HibernateUtil.getSessionFactory().openSession();
-		int id = 60;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("enter id::");
+		int id = sc.nextInt();
+		
 		Query query = sessionObj
-				.createQuery(" from Employee where Id=:inputEmpId");
+				.createQuery(" from Employee where id=:inputEmpId");
 		query.setParameter("inputEmpId", id);
+		
+		// Query query1 = sessionObj.createQuery(" from Employee where id="+id);
+		
 		Employee emp = (Employee) query.uniqueResult();
+		
 		System.out.println(emp);
 		sessionObj.close();
 	}
+	
 	
 	private static void getNameById0() {
 		// get name for a given empid
@@ -116,26 +148,39 @@ public class TestHQL {
 		sessionObj.close();
 	}
 	
+
+	/**
+	 Req :   get employee name  by taking id as input
+	 HQL :    select userName from Employee where id = <input>
+    USE  String userName = (String) query.uniqueResult(); -> fetches single column
+	    
+	*/
 	
 	private static void getNameById() {
 		// get name for a given empid
 		Session sessionObj = HibernateUtil.getSessionFactory().openSession();
-		int id = 60;
+		System.out.println("enter id::");
+		Scanner sc = new Scanner(System.in);
+		int id = sc.nextInt();
+		
 		Query query = sessionObj
-				.createQuery("select userName from Employee where Id=:inputEmpId");
+				.createQuery("select userName from Employee where id=:inputEmpId");
 		query.setParameter("inputEmpId", id);
 		String userName = (String) query.uniqueResult();
 		System.out.println(userName);
 		sessionObj.close();
-		
-		/*
-		 SQL: SELECT NAME FROM EMPLOYEE WHERE ID=90
+	}
+	
+	
+	/*
+	 SQL: SELECT NAME FROM EMPLOYEE WHERE ID=90
 how many rows? 1 row     -> use uniqueResult()
 how many columns? 1 column  (name)
 what is the column datatype --> string
 the return type of uniqueResult() method is integer
-		 */
-	}
+	 */
+	
+	
 
 	public static void getNameById2() {
 		// get name for a given empid
@@ -202,22 +247,79 @@ the return type of uniqueResult() method is integer
 		sOj.close();
 	}
 	
+	/**
+	 Return of uniqueResult:
+   ---------------------------
+   1 column (varchar)  -> String
+   1 column (Number)  -> Integer/Long
+   all columns    -> Employee obj
+   >1 column but < all columns   -> Object array
+   
+    Return of list:
+   ---------------------------
+   1 column (varchar)  -> List<String>
+   1 column (Number)  -> List<Integer>/List<Long>
+   all columns    -> List<Employee? obj
+   >1 column but < all columns   -> List<Object> array
+   
+	 Req :   get employee name  and salary  by taking id as input
+     HQL :    select userName,usersalary from Employee where id=:inputId
+     use uniqueResult()
+     returnType of uniqueResult() : Object row[] array
+                          row[0]  -> contain name
+                          row[1] -> contain salary
+                          
+  */
+  
+	
 	private static void printNameAndSalById() {
 		// get session obj
 		Session sOj = HibernateUtil.getSessionFactory().openSession();
-		int id = 189;
+		System.out.println("enter id::");
+		Scanner sc = new Scanner(System.in);
+		int id = sc.nextInt();
+		
 		// create query obj
 		Query query = sOj
 	    .createQuery("select userName,usersalary from Employee where id=:inputId ");
 		query.setParameter("inputId", id);
-		Object[] data = (Object[]) query.uniqueResult();
-		String name = (String) data[0]; // userName
-		Integer sal = (Integer) data[1]; // usersalary
+		
+		Object[] row = (Object[]) query.uniqueResult();
+		
+		String name = (String) row[0]; // userName
+		Integer sal = (Integer) row[1]; // usersalary
 		System.out.println(name);
 		System.out.println(sal);
-		// close sesion obj
-		sOj.close();
 	}
+	
+	private static void printAllNameAndSalNewwwwww() {
+		// get session obj
+		Session sOj = HibernateUtil.getSessionFactory().openSession();
+		// create query obj
+		Query query = sOj
+	    .createQuery("select userName,usersalary from Employee ");
+		List<Object[]> rows = (List<Object[]>) query.list();
+		for(Object[] row : rows) {
+			String name = (String) row[0]; // userName
+			Integer sal = (Integer) row[1]; // usersalary
+			System.out.println(name);
+			System.out.println(sal);
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	private static void printAllNamesAndSal() {
 		// get session obj

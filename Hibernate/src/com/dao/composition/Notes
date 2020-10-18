@@ -1,31 +1,38 @@
+has-A (composition)
+---------------------
+1 table two java classes.
+
+
+DB layer:
+------------
 Table: PersonWithAddress
-Columns: id , userName , age, , city ,  ,country ,pin
+Columns: id , userName , age, strret ,city ,state,country ,pin
 
 
-Java:
+
+Java Layer:
+-------------
 Earlier : 1 entity classs
-Problem: Address in used for deifferent models like Person, Employee, Student , Order.
+Now : 
+since Address in used for different models like Person, Employee, Student , Order.
 Solution : we need seperate class for Address.
-  
-Now:
-Create Two class for on table
+
+
+Create Two classes for one table
 1.PersonWithAddress.java
 2.Address.java
 
-has-a relationship
+person has a address.
+New changes:
+--------
+- use @Embedded in PersonWithAddress.java
+- use @Embeddable for Address.java
 
-
+	
 PersonWithAddress.java:
 ----------------------------------
-  
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
+ 
+ 
 @Entity
 @Table(name = "PersonWithAddress")
 public class PersonWithAddress {
@@ -41,47 +48,10 @@ public class PersonWithAddress {
 	@Column(name = "age")
 	private int age;
 
-	@Embedded
+	@Embedded // this annotation specifies that address obj is part of same table
 	private Address curAddress;
 	
- 	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}
-
-	public Address getCurAddress() {
-		return curAddress;
-	}
-
-	public void setCurAddress(Address curAddress) {
-		this.curAddress = curAddress;
-	}
-
-	@Override
-	public String toString() {
-		return "PersonWithAddress [id=" + id + ", name=" + name + ", age=" + age + ", curAddress=" + curAddress + "]";
-	}
-
- 
+ 	  
 	
 }
 
@@ -111,69 +81,19 @@ public class Address {
 	@Column(name = "pin")
 	private int pin;
 
-	public void displayAddress(){
-		System.out.println(streetNo);
-		System.out.println(city);
-		System.out.println(pin);
-		System.out.println(country);
-	}
-	public String getStreetNo() {
-		return streetNo;
-	}
-
-	public void setStreetNo(String streetNo) {
-		this.streetNo = streetNo;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	public int getPin() {
-		return pin;
-	}
-
-	public void setPin(int pin) {
-		this.pin = pin;
-	}
-
-}
+	 }
 
 
 
 
 1. PersonWithAddress.java
-( - is a entity class
- - Use 
- @Entity
-@Table(name = "PersonWithAddress")
- before class name
+( - is a entity class )
+ - Use @Entity
+       @Table(name = "PersonWithAddress")
+   before class name
 
-)
-  
+and use  @Embedded for address obj [	private Address curAddress; ]
 
-  @Embedded
-	private Address curAddress;
 	
 2. Address.java:
 - is not a entity class

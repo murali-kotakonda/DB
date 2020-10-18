@@ -77,9 +77,6 @@ public class AllCriteria {
 		Criterion salaryCondition = Restrictions.lt("usersalary", 5000);
 		
 		
-		
-		
-		
 		//name = 'krishna' or  salaryInfo < 5000
 		LogicalExpression joinOr = Restrictions.or(salaryCondition, nameCondition);
 		empCriteria.add( joinOr );

@@ -7,6 +7,21 @@ import org.hibernate.criterion.Restrictions;
 
 import com.dao.Employee;
 import com.dao.HibernateUtil;
+
+
+/**
+ get employee whose name contains 'kumar'
+ 
+ 
+ steps:
+ 1.create criteria obj
+ Criteria empCriteria = s.createCriteria(Employee.class);
+ 
+ 2. add restriction using like method
+ 		String userNameLike ="kumar ;
+ 	  empCriteria.add(Restrictions.like("userName", "%"+userNameLike+"%"));
+ 
+ */
 public class TestCriteriaLike {
 	public static void main(String[] args) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -14,10 +29,8 @@ public class TestCriteriaLike {
 
 		Criteria empCriteria = session.createCriteria(Employee.class);
 
-		if(userNameLike!=null  && !userNameLike.equals("") ){
-			empCriteria.add(Restrictions.like("userName", "%"+userNameLike+"%"));
-			// select * from EmployeeDetails where userName like '%testuser87%'
-		}
+		 empCriteria.add(Restrictions.like("userName", "%"+userNameLike+"%"));
+		// select * from EmployeeDetails where userName like '%testuser87%'
 
 		List<Employee> employees = empCriteria.list();
 		for(Employee e  : employees){

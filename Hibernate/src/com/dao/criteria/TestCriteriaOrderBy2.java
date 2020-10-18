@@ -7,30 +7,26 @@ import org.hibernate.criterion.Order;
 
 import com.dao.Employee;
 import com.dao.HibernateUtil;
-
 /**
-  - How to perform Sorting/Ordering based on id,userName,usersalary?
- 
-solution:
------------
-  
-  sort in ascening order:
+
+ sort in descending order:
   ----------------------------
   pass the instance variable names not the db column names
-  empCriteria.addOrder(Order.asc("id")); -> sort based on id
-  empCriteria.addOrder(Order.asc("userName")); -> sort based on userName
-  empCriteria.addOrder(Order.asc("usersalary")); -> sort based on usersalary
+  empCriteria.addOrder(Order.desc("id")); -> sort based on id
+  empCriteria.addOrder(Order.desc("userName")); -> sort based on userName
+  empCriteria.addOrder(Order.desc("usersalary")); -> sort based on usersalary
+ 
  
  */
-
-public class TestCriteriaOrderBy {
+public class TestCriteriaOrderBy2 {
 	public static void main(String[] args) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		//input can be Id , userName , usersalary
+		String orderParm = "id";
 		
 		Criteria empCriteria = session.createCriteria(Employee.class);
-		
-		empCriteria.addOrder(Order.asc("userName"));
-		empCriteria.setMaxResults(20);
+		empCriteria.addOrder(Order.asc(orderParm));
+
 		List<Employee> employees = empCriteria.list();
 		for(Employee e  : employees){
 			System.out.println(e);

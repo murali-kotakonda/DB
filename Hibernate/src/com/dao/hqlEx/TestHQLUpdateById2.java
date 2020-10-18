@@ -8,18 +8,25 @@ import org.hibernate.Transaction;
 
 import com.dao.HibernateUtil;
 
-public class TestHQLUpdate2 {
-	// 	assignment : update employee salary 
+public class TestHQLUpdateById2 {
+	/**
+	update employee salary, employee name using employee id
+	hql: update Employee set usersalary=:mySal where id=:myId
+	use executeUpdate()
+
+	 */
 	public static void main(String[] args) {
 		Session  sObj = HibernateUtil.getSessionFactory().openSession();
-		int id =22;
-		int sal = 20000;
+		int id =1;
+		int sal = 30000;
+		String name="raj kumar";
 		Transaction transaction = sObj.getTransaction();
 		
 		transaction.begin();
-		Query  q = sObj.createQuery("update Employee set usersalary=:mySal where id=:myId");
+		Query  q = sObj.createQuery("update Employee set usersalary=:mySal , userName=:myName where id=:myId");
 		q.setParameter("myId", id);
 		q.setParameter("mySal", sal);
+		q.setParameter("myName", name);
 		int rowsAffected = q.executeUpdate();
 		transaction.commit();
 		

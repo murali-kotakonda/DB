@@ -9,17 +9,27 @@ import org.hibernate.criterion.Restrictions;
 import com.dao.Employee;
 import com.dao.HibernateUtil;
 
+
+/**
+ get whose salary is between 5000 and 10000
+ 
+ steps:
+ 1.create criteria obj
+ Criteria empCriteria = s.createCriteria(Employee.class);
+ 
+ 2. add restriction uisng betwen method
+ 	  empCriteria.add(Restrictions.between("usersalary", 5000, 10000));
+ 
+ */
+
 public class TestCriteriaMinMax {
 	public static void main(String[] args) {
 		Session s = HibernateUtil.getSessionFactory().openSession();
-		int minSal = 5000;
-		int maxSal = 10000;
 
 		Criteria empCriteria = s.createCriteria(Employee.class);
-
-		if (minSal != 0 && maxSal != 0) {
-			empCriteria.add(Restrictions.between("usersalary", minSal, maxSal));
-		}
+		
+		empCriteria.add(Restrictions.between("usersalary", 5000, 10000));
+		 
 		List<Employee> employees = empCriteria.list();
 
 		for (Employee e : employees) {

@@ -5,17 +5,20 @@ import org.hibernate.Session;
 import com.dao.HibernateUtil;
 
 /**
- * @author I335484
+  How to insert row in the PersonWithAddess table?
+steps:
   1. Create sf
   2.create session
   3.create trasaction
+  
   4.create person obj with data
   5.create addres obj with data
   6.keep address inside the person obj
-  7.save person obj
+  7.save person obj // one row is created in PersonWithAddess table
+  
   8.commit txn
   9.close session
-  
+
  
  */
 public class TestPersonSave {

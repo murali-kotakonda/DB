@@ -3,7 +3,7 @@ Execute SQL queries:
 1.create sf
 2.create sesion
 3.create query obj using hql 
-SQLQuery  q = session.createQuery("<any sql>");
+SQLQuery  q = session.createSQLQuery("<any sql>");
 
 4.specify the entity class
   query.addEntity(Employee.class);

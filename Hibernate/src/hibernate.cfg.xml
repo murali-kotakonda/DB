@@ -24,17 +24,22 @@
 
 		<!-- Entity classes -->
 		
-	<mapping class="com.dao.Employee" />
-		
-	<mapping class="com.dao.tablePerHier.Person"/> 
-	<mapping class="com.dao.tablePerHier.EmployeeDetails"/> 
-	<mapping class="com.dao.tablePerHier.Student"/> 
+	  <mapping class="com.dao.Employee" /> 
+			
+	<mapping class="com.dao.composition.PersonWithAddress" />
+	
 	
 	 </session-factory>
 </hibernate-configuration>
 
 
 <!--
+
+
+	<mapping class="com.dao.tablePerHier.Person"/> 
+	<mapping class="com.dao.tablePerHier.EmployeeDetails"/> 
+	<mapping class="com.dao.tablePerHier.Student"/> 
+	
 	
 	<mapping class="com.mnp.inherit.manytomany.Student" />
 		<mapping class="com.mnp.inherit.manytomany.Cource" />
