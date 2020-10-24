@@ -1,0 +1,66 @@
+Inheritence Join table:
+------------------------------
+  
+3 tables and tables are related/associated.
+3 Java classes 
+  
+  
+DB table design:
+--------------------
+ table: Person3
+ columns : userId(PK) , name ,age
+ 
+ table: Student3
+ columns : userId(FK refers Person3) , stuid, branchid
+ 
+ 
+ table: employee3
+ columns : userId(FK refers Person3) , projid, deptid
+ 
+ 
+ 
+
+Java Design:
+-----------------
+package : jointable 
+
+Person3.java:
+===================
+@Entity
+@Table(name = "Person3")
+@Inheritance(strategy = InheritanceType.JOINED)// specify inheritence type 
+public class Person3 {
+
+}
+
+
+Employee3.java:
+===================
+@Entity  
+@Table(name = "Employee3")
+@PrimaryKeyJoinColumn(name="ID") // relate the pk and fk between Employee and Person 
+public class Employee3 extends Person3{ 
+ 
+
+}	
+	
+
+Student3.java:
+===================
+@Entity  
+@Table(name = "Student3")
+@PrimaryKeyJoinColumn(name="ID")
+public class Student3 extends Person3{ // relate the pk and fk between Student and Person 
+
+}
+  
+  
+  
+3.add entries in hiberante.cfg.xml:
+  -------------------------------------------------
+   
+		<mapping class="jointable.Person3"/> 
+        <mapping class="jointable.Employee3"/> 
+        <mapping class="jointable.Student3"/> 
+            
+

@@ -13,8 +13,10 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PersonDetails1")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Table(name = "Profile")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue(value = "person")
 public class Person {
 
 	@Id
@@ -24,7 +26,7 @@ public class Person {
 
 	@Column(name = "name", nullable = false, length = 30, unique = true)
 	private String userName;
-
+	
 	@Column(name = "age")
 	private int age;
 
@@ -51,5 +53,5 @@ public class Person {
 	public void setAge(int age) {
 		this.age = age;
 	}
-
+	
 }

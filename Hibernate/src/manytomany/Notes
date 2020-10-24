@@ -1,0 +1,121 @@
+Many to many:
+---------------------
+=> one to many in bi-directional.
+
+ex:
+cource
+student
+
+one course has multiple students  ===> One to many from course to Student
+one student attends multiple courses  ===> One to many from  Student to course
+
+for many to many we need three tables
+1.Course
+2.Student
+3.StudentCourseMap table
+
+
+DB design:
+--------------------------------
+
+Course table:  
+columns:1.courseid(PK)  2.coursename
+
+
+student table:
+columns: 1.stuid(PK)   2.desc    3.name
+
+
+studentcourseMap table:
+columns: 1.stuid(fk)   2.courseid(fk)
+
+
+two students 
+two courses
+and both student attends core and adv classes.
+
+
+course:
+---------
+courseid  coursename
+----------------------------
+8	  			core
+9	  			adv
+
+
+
+student:
+--------
+stuid   desc      name
+-------------------------
+7	    employee	  raju
+10	  student	    uma
+
+
+studentcourseMap:
+---------------------
+  stuid    courseid
+  --------------------
+   7          8
+   7          9
+  10          8
+  10          9
+
+
+
+New annotations:
+---------------------
+
+
+Student.java
+-------------
+@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name = "StudentCourceMap", 
+	joinColumns = { @JoinColumn(name = "stuId") }, 
+	inverseJoinColumns = { @JoinColumn(name = "courceId") })
+	private List<Cource> cources;
+	
+Cource.java:
+--------------
+@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name = "StudentCourceMap", 
+	joinColumns = { @JoinColumn(name = "courceId") }, 
+	inverseJoinColumns = { @JoinColumn(name = "stuId") })
+	private List<Student> students;
+	
+
+
+here @JoinTable is required for configuring the 3rd table StudentCourceMap
+joinColumns specifies the mapping in current class
+inverseJoinColumns specifies the mapping in realted mapping class
+
+
+
+
+  
+insert 
+there are two students and two cources.
+save student details
+save courses details
+student1 is attending all the two courses .--> need to save this 
+student2 is attending all the two courses .--> need to save this
+
+Steps
+---------------------------------------------
+1.session factory
+2.session
+3.create two students objs with data
+4.create two cources objs with data
+5.keep courses objs for student1 obj 
+6.keep courses objs for student2 obj
+7.save student1   
+8.save student2
+//8 rows created.
+//two rows in student table
+//two rows in course table
+//4 rows in studentcoursemap table
+9.close session.
+  
+  
+  
+     

@@ -4,10 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-@Entity
+@Entity  
 @DiscriminatorValue(value = "employee")
 public class EmployeeDetails extends Person{
-	
+ 
 	@Column(name = "projId")
 	private String projId;
 	
@@ -29,5 +29,6 @@ public class EmployeeDetails extends Person{
 	public void setDeptId(String deptId) {
 		this.deptId = deptId;
 	}
+	
 	
 }

@@ -23,39 +23,41 @@
 		<property name="hbm2ddl.auto">update</property>
 
 		<!-- Entity classes -->
-		
-	  <mapping class="com.dao.Employee" /> 
-			
-	<mapping class="com.dao.composition.PersonWithAddress" />
-	
+		 
+		   <mapping class="com.dao.Employee" /> 
+		 <mapping class="dates.Info1"/>
+		 <mapping class="dates.Info2"/>  
+		 
 	
 	 </session-factory>
 </hibernate-configuration>
 
 
 <!--
+<mapping class="com.dao.composition.PersonWithAddress" />
 
-
-	<mapping class="com.dao.tablePerHier.Person"/> 
-	<mapping class="com.dao.tablePerHier.EmployeeDetails"/> 
-	<mapping class="com.dao.tablePerHier.Student"/> 
+			
+		<mapping class="oneToOne.EmployeeWithAddress" />
+		<mapping class="oneToOne.AddressDetails" />	
 	
 	
-	<mapping class="com.mnp.inherit.manytomany.Student" />
-		<mapping class="com.mnp.inherit.manytomany.Cource" />
+	<mapping class="manytomany.Student" />
+		<mapping class="manytomany.Cource" />
 	
-		<mapping class="com.mnp.oneToOne.EmployeeWithAddress" />
-		<mapping class="com.mnp.oneToOne.AddressDetails" />
-	
+	<mapping class="tablePerHier.Person"/> 
+		<mapping class="tablePerHier.EmployeeDetails"/> 
+		<mapping class="tablePerHier.Student"/>
 		
-			<mapping class="com.dao.inherit.joinTable.Person2"/> 
-			<mapping class="com.dao.inherit.joinTable.EmployeeDetails2"/>
-			 <mapping class="com.dao.inherit.joinTable.Student2"/>		
+	
+			<mapping class="tableperclass.Person1"/> 
+			<mapping class="tableperclass.Employee1"/>
+			 <mapping class="tableperclass.Student1"/> 
+			 
+			 
+			  <mapping class="tablejoinInherit.Person3"/> 
+	     <mapping class="tablejoinInherit.Employee3"/>
+		 <mapping class="tablejoinInherit.Student3"/>
 		
-			<mapping class="com.dao.tablePerConcreteClass.Person1"/> 
-			<mapping class="com.dao.tablePerConcreteClass.EmployeeDetails1"/>
-			 <mapping 
-			class="com.dao.tablePerConcreteClass.Student1"/> 
 		
 	<mapping class="com.dao.composition.PersonWithAddress" />
 		
@@ -70,6 +72,8 @@
 		<mapping class="com.dao.composition.StudentWithAddress" />
 		
 		
+	<mapping class="onetomany.Customer" />
+		<mapping class="onetomany.Accounts" />
 	
 		
 		

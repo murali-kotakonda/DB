@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue(value = "student")
-public class Student extends Person{
+public class Student extends Person {
 
 	@Column(name = "semId")
 	private String semId;
@@ -31,4 +31,3 @@ public class Student extends Person{
 	}
 
 }
-

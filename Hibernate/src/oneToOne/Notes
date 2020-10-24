@@ -1,0 +1,383 @@
+Relationships/assocation mapping:
+--------------------------------------
+Primary key   : unique, not null in tabel1
+Foriegn key   : is a column in table2 that refers to the primary key of table1
+  
+
+-> One to One     
+ -> One row in one table1 is related to one row in  table2
+    Use @OneToOne for entity class
+    ex: one empl has only one address
+ -> One to many     -> One row in one table1 is related to multiple rows in  table2
+  Use @OneToMany for entity class
+  ex: one employee has many addresses 
+-> Many to one     -> many rows in  table1 is related to one row in  table2
+  Use @ManyToOne for entity class
+  ex: many address belongs to one employee
+-> Many to many    -> many rows in  table1 is related to many row in  table2
+ Use @ManyToMany for entity class
+ ex: one emp belongs to multiple departments
+    multiple departments are related to one emp
+  
+  
+ TABLE RELATION SHIP IS Represented using  Primary key + Foriegn key
+ Java Relationship is Represented using has-a or composition.( obj of second class as instance variable for the first class)
+    
+    
+  OneTOOne:
+----------------------
+  package : oneToOne
+  
+  One Employee has One Address.
+  
+  Employee info is in "EmployeeWithAddress" table
+  Address info is stored in "AddressDetails" table
+    
+  1.Db design:
+		  Table1 :EmployeeWithAddress
+          columns: id(PK) , username, age, currAddrId(FK refer to id column of  AddressDetails table) 
+          
+          Table2 :AddressDetails
+          columns: id(PK) , streetNo, city, state , country , pin 
+          
+          
+  2.Entity class:
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+@Entity
+@Table(name = "AddressDetails")
+public class AddressDetails {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private int id;
+	
+	@Column(name = "streetNo")
+	private String streetNo;
+
+	@Column(name = "city")
+	private String city;
+	
+	@Column(name = "state")
+	private String state;
+	
+	@Column(name = "country")
+	private String country;
+	
+	@Column(name = "pin")
+	private int pin;
+
+	@Override
+	public String toString() {
+		return "AddressDetails [id=" + id + ", streetNo=" + streetNo
+				+ ", city=" + city + ", state=" + state + ", country="
+				+ country + ", pin=" + pin + "]";
+	}
+	public String getStreetNo() {
+		return streetNo;
+	}
+
+	public void setStreetNo(String streetNo) {
+		this.streetNo = streetNo;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public int getPin() {
+		return pin;
+	}
+
+	public void setPin(int pin) {
+		this.pin = pin;
+	}
+
+}
+
+
+
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "EmployeeWithAddress")
+public class EmployeeWithAddress {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private int id;
+
+	@Column(name = "userName")
+	private String name;
+
+	@Column(name = "age")
+	private int age;
+
+	//@OneToOne(cascade=CascadeType.ALL,fetch= FetchType.LAZY) //type of relation
+  @OneToOne(fetch= FetchType.LAZY) //type of relation
+	@JoinColumn(name = "curAddId") // column name
+	private AddressDetails curAddress; // use the dependent obj  as instance variable.
+	
+	@Override
+	public String toString() {
+		return "EmployeeWithAddress [id=" + id + ", name=" + name + ", age=" + age ;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public AddressDetails getCurAddress() {
+		return curAddress;
+	}
+
+	public void setCurAddress(AddressDetails curAddress) {
+		this.curAddress = curAddress;
+	}
+}
+
+
+  3. add  the entries for entity classes in hibernate.cfg.xml
+  <mapping class="oneToOne.EmployeeWithAddress" />
+		<mapping class="oneToOne.AddressDetails" />
+	
+  
+  4.Insert
+  
+  cascade - is a table behaviour when two tbales are related.
+  cascade (impact on the child table when row is inserted/updated/deleted in parent table)
+  child table :AddressDetails
+  parent table : EmployeeWithAddress
+  
+  1.Approach1 with cascade @OneToOne(cascade=CascadeType.ALL,fetch= FetchType.LAZY)  in  EmployeeWithAddress
+    - create sf
+    - create session obj
+    - create emp and address objs
+    - keep addres obj inside emp obj
+    - save only emp object using transaction obj.  ( 1 row created in EmployeeWithAddress table and one row is created in AddressDetails table)
+    
+    
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+  public static void main(String[] args) {
+  
+ //create session factory
+		SessionFactory sf = 	 new Configuration().configure().buildSessionFactory();
+
+		//create session obj
+		Session s = sf.openSession();
+		
+		// create address obj with data
+		AddressDetails add = new AddressDetails();
+		add.setCity("Hyd");
+		add.setCountry("INDIA");
+		add.setPin(123456);
+		add.setState("TS1");
+		add.setStreetNo("YUSAF GUDA12");
+		
+	 	// create emp obj with data
+		EmployeeWithAddress emp = new EmployeeWithAddress();
+		emp.setAge(34);
+		emp.setName("krishna kumar12");
+
+		// keep address obj inside emp
+		emp.setCurAddress(add);
+
+		//save employee obj
+		s.getTransaction().begin();
+		s.save(emp);  //1 row created in employee table  + 1 row is inserted in address table
+		s.getTransaction().commit();
+
+		s.close();
+	
+  }
+
+ 2.Approach2 without cascade  ( save seperatrely) 
+    - create sf
+    - create session obj
+    - create emp and address objs
+    - save the address obj using transaction obj.(1 row is created in AddressDetails table)
+    - keep addres sobj inside emp obj
+    - save  emp object using transaction obj.    ( 1 row created in EmployeeWithAddress table     )
+   
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+   public static void main(String[] args) {
+
+		//create session factory
+		SessionFactory sf = 	 new Configuration().configure().buildSessionFactory();
+
+		//create session obj
+		Session s = sf.openSession();
+		
+		// create address obj with data
+		AddressDetails add = new AddressDetails();
+		add.setCity("Hyd");
+		add.setCountry("IN");
+		add.setPin(12345);
+		add.setState("TS");
+		add.setStreetNo("YUSAF GUDA");
+		
+		// save the address obj
+		s.getTransaction().begin();
+		s.save(add);
+		s.getTransaction().commit();
+
+		// create emp obj with data
+		EmployeeWithAddress emp = new EmployeeWithAddress();
+		emp.setAge(34);
+		emp.setName("krishna kumar");
+
+		// keep address obj inside emp
+		emp.setCurAddress(add);
+
+		//save employee obj
+		s.getTransaction().begin();
+		s.save(emp);
+		s.getTransaction().commit();
+
+		s.close();
+ }
+   
+  5.Read by id 
+    - create sf
+    - create session obj
+    - use load method to fetch the EmployeeWithAddress obj
+    - EmployeeWithAddress internally has address obj also.
+    - load method fetches the employee details + address details based on fetch configuration.
+    - close session
+    import org.hibernate.Session;
+
+    public static void main(String[] args) {
+		Session s = HibernateUtil.getSessionFactory().openSession();
+		EmployeeWithAddress emp = (EmployeeWithAddress) 
+				s.load(EmployeeWithAddress.class, 1);// 1st query
+		System.out.println(emp);
+		System.out.println(emp.getCurAddress());//2nd query
+		s.close();
+		System.out.println(emp);
+		System.out.println(emp.getCurAddress());
+	}
+  
+
+@OneToOne(cascade=CascadeType.ALL,fetch= FetchType.LAZY)
+fetch is applicable for only select
+
+
+Fetch Types:
+-----------
+  fetch= FetchType.LAZY    ->fetch only the parent details; dont fetch the child details. 
+                             ex: fetch the employee details without address.
+  fetch= FetchType.EAGER   -> fetch both the parent and child details in a single db call. 
+                              ex: fetch the employee + address detials in a single call.
+                                
+  most of the cases it is preferred to use  FetchType.LAZY.
+                                
+  1. Requirement : fetch only employee details: (use  fetch= FetchType.LAZY)
+  if  fetch= FetchType.EAGER => we are fetching both emp + address details. but considering only employee details.(perf  + memory issue)
+    
+  2. Requirement : fetch employee details + address details  in one scenario: (use  fetch= FetchType.EAGER or fetch= FetchType.LAZY)
+  if  fetch= FetchType.EAGER => we are fetching both emp + address details. 
+    
+  3. ALways fetch employee + address details   in all scenarios(use  fetch= FetchType.EAGER)
+                                
+ 
+ 
+ Req: How to fetch empl and address details:
+ 
+ 1.Using fetchtype Eager
+ -------------------------------------------
+  EmployeeWithAddress emp = (EmployeeWithAddress) s.load(EmployeeWithAddress.class, 1);
+  //one call that fetches emp and address details
+  s.close();
+ 
+ 2.Using fetchtype Lazy
+ -------------------------------------------  
+   EmployeeWithAddress emp = (EmployeeWithAddress) s.load(EmployeeWithAddress.class, 1);
+   //one call that fetches only emp details
+   
+  //for fetching address details:
+  emp.getCurAddress();//call the getter method
+  //this will fetch the address details by making db call.
+  
+  s.close();
+  
+  // emp.getCurAddress() -> makes a db call ; and db call should happen before closing the session.
+  
+    
+if the code emp.getCurAddress() is called after closing the session then we will get 
+org.hibernate.LazyInitializationException
+
+
+
+1st query:
+select employeewi0_.id as id1_1_0_, employeewi0_.age as age2_1_0_, employeewi0_.curAddId as curAddId4_1_0_, employeewi0_.userName as userName3_1_0_ 
+from EmployeeWithAddress employeewi0_ where employeewi0_.id=?
+
+2nd query:  
+select addressdet0_.id as id1_0_0_, addressdet0_.city as city2_0_0_, addressdet0_.country as country3_0_0_, addressdet0_.pin as pin4_0_0_, addressdet0_.state as state5_0_0_, addressdet0_.streetNo as streetNo6_0_0_ 
+from AddressDetails addressdet0_ where addressdet0_.id=?Hibernate: select addressdet0_.id as id1_0_0_, addressdet0_.city as city2_0_0_, addressdet0_.country as country3_0_0_, addressdet0_.pin as pin4_0_0_, addressdet0_.state as state5_0_0_, addressdet0_.streetNo as streetNo6_0_0_ from AddressDetails addressdet0_ where addressdet0_.id=?
+ 
+
+
+
+

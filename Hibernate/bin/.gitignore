@@ -1,3 +1,17 @@
 /basics/
+/cache/
 /com/
+/dates/
+/hibernate.cfg.out.xml
+/hibernate.cfg.xml
+/main-qimg-0e98546368ea9b013384b7fb0b145199-556x300.png
+/manytomany/
 /nativeSql/
+/oneToOne/
+/onetomany/
+/selfJoin/
+/setup/
+/states/
+/tablePerHier/
+/tablejoinInherit/
+/tableperclass/

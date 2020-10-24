@@ -5,8 +5,9 @@ import java.util.List;
 import org.hibernate.Session;
 
 import com.dao.HibernateUtil;
-import com.mnp.oneToOne.AddressDetails;
-import com.mnp.oneToOne.EmployeeWithAddress;
+
+import oneToOne.AddressDetails;
+import oneToOne.EmployeeWithAddress;
 
 public class TestOneToMany {
 

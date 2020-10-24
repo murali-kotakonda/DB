@@ -1,0 +1,132 @@
+
+Person.java:
+--------
+id
+name
+age
+
+Student.java:
+----------
+Student  extends Person
+semid
+branchid
+
+Employee.java
+--------------
+Employee extends Person
+projid
+deptid
+
+
+
+Map the Inheritenc classes to the db tables.
+3 approaches:
+  -> Table per hierarchy   -> All the 3 entities class has same table
+  -> Table per class       -> Every class has seperate table
+  -> Table per subclass    -> Normalization with every table having seperate class
+  
+ 
+  
+Table per hierarchy:
+----------------------
+one table for all the inheritence classes.
+person, student, employee info is saved in a single table.
+
+  
+tableName: Profile
+columns: userid , name , age ,projid, deptid , semid, branchid , type 
+
+1 table
+3 entity classes
+
+
+1. When Person is saved , then for columns projid, deptid , semid, branchid is saved as null.
+2. When Student is saved  ,  then for columns projid, deptid is saved as null.
+3. When Employee is saved , then for columns  semid, branchid is saved as null.
+ 
+
+
+Add additional column : "TYPE"  
+Allowed values are : "person" or "student"  or "employee" 
+TYPE is a discriminatory column
+
+
+DiscriminatorColumn - meaning the column that specifies what type of type .  
+
+for type (discriminatory) we need to add new annotation
+@DiscriminatorColumn
+
+
+The annotation
+@DiscriminatorColumn(name = "type" , discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue(value = "person")
+  
+  
+
+Profile:
+---------
+id    name    age  semid   branchid  projid   deptid   type
+100   user1   23   null    null      null     null     person     ---> Person
+200   user2   19   3       CSC       null     null     student    ---> Student 
+300   user3   32   null    null      1221     876      employee   ---> Employee
+
+
+
+Get all students:
+----------------
+select * from profile where type = 'student'
+
+  
+1. Get all employee
+Select * from PersonDetails1 where type='employee'
+
+2. Get all Persons
+Select * from PersonDetails1 where type='person'
+
+3. Get all students
+Select * from PersonDetails1 where type='student'
+ 
+  
+package: tableperhier
+---------------------------
+
+New changes:
+------------------------
+1. Person class
+ 
+	@Inheritance(strategy = InheritanceType.SINGLE_TABLE)         -> specifies inheritr type 
+	@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)  ->specify info for DiscriminatorColumn
+	@DiscriminatorValue(value = "person") ->specify info for DiscriminatorColumn value
+	public class Person {
+     <some code> 
+  }
+
+2. Employee class
+
+    @Entity  
+    @DiscriminatorValue(value = "employee")  ->specify info for DiscriminatorColumn value
+    public class EmployeeDetails extends Person{
+     <some code> 
+    }
+    
+3.Student   
+
+    @Entity  
+    @DiscriminatorValue(value = "student")  ->specify info for DiscriminatorColumn value
+    public class Student extends Person{
+     <some code> 
+    }
+
+
+4.add entries in hibernate.cfg.xml
+<mapping class="tableperhier.Person"/> 
+	<mapping class="tableperhier.EmployeeDetails"/> 
+	<mapping class="tableperhier.Student"/> 
+	
+  
+create person obj , emp obj , student obj
+save person obj ---> 1 row created in Profile table
+save student obj ---> 1 row created in Profile table
+save employee obj ---> 1 row created in Profile table
+
+

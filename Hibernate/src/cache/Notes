@@ -7,7 +7,7 @@ adv:
 
 -> applicable only for Read queries.
   
-Cache -> is a area/memory fo temporary db storage.
+Cache -> is a area/memory for temporary db storage.
 Cache is managed by hibernate.  
   
 without cache :
@@ -22,12 +22,37 @@ With Caching:
   
 Who will keep the data or delete the data from cache:  Hiberante  
 
-Hibernate suppots two types of caching:
+Hibernate supports two types of caching:
 1.Level-1  (session obj level)
 2.Level-2  (session factoy level)   , instead we will use other external cache providers . EX: Redus, Nosql ...
   
   
 Level-1: By deafult hiberante  supports level1
+
+1.Level-1  (session obj level)
+--------------------------------------
+
+1.1st call will happend to cache
+2.if not found then only calls the db
+
+within the session if we try to call the db with the same query multiple times
+then only 1st time call will hit the db
+from second call it will fetch from cache
+after session is closed , then cache is cleared.
+
+
+
+1.open session
+2.call load method to fetch emloyee whose id is 1   -> hit db
+3.call load method t0 fetch emloyee whose id is 1   -> will not hit db , fetches cache
+4.close session
+ // cache is closed
+ 
+5.open session
+6.call load method to fetch emloyee whose id is 1   -> hit db
+7.call load method t0 fetch emloyee whose id is 1  -> will not hit db , fetches cache
+8.close session
+
 
 //Ge Employee By Id
 public static void main(String[] args) {

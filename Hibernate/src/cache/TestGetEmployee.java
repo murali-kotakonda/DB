@@ -2,44 +2,36 @@ package cache;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
 import com.dao.Employee;
+import com.dao.HibernateUtil;
 
 public class TestGetEmployee {
 
 	public static void main(String[] args) {
-		SessionFactory sf = new Configuration().configure().buildSessionFactory();
-		Session session = sf.openSession();
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+	
 		System.out.println("*******SESSION1 OPNED********");
-		int id = 46;
-
+		Session session = sf.openSession();
 		System.out.println("****call load method ****");
-		Employee emp = (Employee) session.load(Employee.class, id);
-		// fetches from the database and keeps inside cache
+		Employee emp = (Employee) session.load(Employee.class, 1);// from db
 		System.out.println(emp);
 
 		System.out.println("****call load method ****");
-		Employee emp1 = (Employee) session.load(Employee.class, id);
-		// fetches from cache
+		Employee emp1 = (Employee) session.load(Employee.class, 1);//from cache
 		System.out.println(emp1);
-
 		session.close();
-
-		System.out.println("*******SESSION1 CLOSED********");
-		Session session2 = sf.openSession();
-
+		
 		System.out.println("*******SESSION2 OPNED********");
-		
+		Session session1 = sf.openSession();
 		System.out.println("****call load method ****");
-		Employee emp3 = (Employee) session2.load(Employee.class, id);
+		Employee emp3 = (Employee) session1.load(Employee.class, 1);//from db
 		System.out.println(emp3);
-		
-		System.out.println("****call load method ****");
-		Employee emp4 = (Employee) session2.load(Employee.class, id);
-		System.out.println(emp4);
 
-		session2.close();
-		System.out.println("*******SESSION2 CLOSED********");
-	}
+		System.out.println("****call load method ****");
+		Employee emp4 = (Employee) session1.load(Employee.class, 1);//from cache
+		System.out.println(emp4);
+		session1.close();
+}
+	
 }

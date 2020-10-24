@@ -1,0 +1,70 @@
+Table per class:
+---------------
+-> seperate table for all classes involved in the inheritence
+
+Person info is saved in person1 table
+student info is saved in student1  table
+employee info is saved in employee1 table
+
+
+Person is parent
+student & employee are child classes
+
+
+3 tables
+3 entity classes
+
+
+Table design:
+------------------
+  
+table:  Person1:
+columns : userid , name , age
+
+
+table: Employee1
+columns : userid , name , age , projid, deptid
+
+table : Student1
+columns : userid , name , age , semid , branchid
+
+
+
+Java design:
+-------------------
+package : tableperclass
+ 
+
+
+add entries in hiebrnate.cfg.xml:
+-----------------------------------
+  <mapping class="tableperclass.Person1"/> 
+  <mapping class="tableperclass.Student1"/> 
+  <mapping class="tableperclass.Employee1"/> 
+  
+  
+  
+Table per class:
+
+@Entity
+@Table(name = "Person1")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)// infirm to hiberante what type of inheritence
+public class Person1 {
+  
+  
+}
+
+
+@Entity
+@Table(name = "Employee1")
+public class Employee1 extends Person1{
+ 
+  
+}
+
+
+@Entity
+@Table(name = "Student1")
+public class Student1 extends Person1{
+  
+}
