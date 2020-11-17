@@ -66,7 +66,7 @@ public class AllCriteria {
 		empCriteria.add(Restrictions.le("usersalary", 10000));
 		
 		
-		empCriteria.add(Restrictions.neProperty(propertyName, otherPropertyName)
+		//empCriteria.add(Restrictions.neProperty(propertyName, otherPropertyName)
 		
 		
 		//Join conditions 

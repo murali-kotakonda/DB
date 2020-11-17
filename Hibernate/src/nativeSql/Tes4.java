@@ -18,7 +18,7 @@ public class Tes4 {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		
 		String sql = "SELECT * FROM EMPLOYEEDETAILS";
-		List<Object[]>list = session.createNativeQuery(sql).list();
+		List<Object[]>list = session.createQuery(sql).list();
 		for (Object[] objects : list) {
             
             System.out.println(objects[0]  + "-" + objects[1]);
