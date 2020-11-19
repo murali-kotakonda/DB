@@ -5,13 +5,13 @@
 /hibernate.cfg.xml
 /main-qimg-0e98546368ea9b013384b7fb0b145199-556x300.png
 /manytomany/
-/dates/
 /nativeSql/
 /oneToOne/
 /onetomany/
 /selfJoin/
-/setup/
 /states/
 /tablePerHier/
+/dates/
+/setup/
 /tablejoinInherit/
 /tableperclass/
