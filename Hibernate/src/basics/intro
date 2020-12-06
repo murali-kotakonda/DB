@@ -7,6 +7,32 @@ ex: springs [mvc, rest, jdbc ] , hiberante
 Framework is available in the form of jar files
 
 
+java frameworks:
+-----------------
+
+--- too complex
+--- heavy weight components
+--- collections of apis to solve specific prblms
+--- Jars
+
+
+adv:
+---------
+efficiency
+security
+expences
+save time and lots of code
+support for faster development
+
+
+dis:
+------
+code is public or opensource
+custom builtin 
+
+
+
+
 Hibernate is a open source framework.
 Hibernate is used for DAO layer for db operations.
 Hibernate is available in the form of jar files.
