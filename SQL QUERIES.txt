@@ -22,8 +22,10 @@ CREATE TABLE EMPLOYEE (
 );
 
 
+-- Delete the table
 DROP TABLE EMPLOYEE;
 
+-- add new column pan 
 ALTER TABLE EMPLOYEE
 ADD Pan varchar2(50);
 
@@ -184,7 +186,7 @@ ORDER BY SALARY DESC
 
 -- GET ALL EMPS WHOSE SALARY IS BETWEEN 30000  TO 700000
 SELECT * FROM EMPLOYEE
-WHERE SALARY BETWEEN 70000 AND 700000;
+WHERE SALARY BETWEEN 30000 AND 700000;
 
 
 
@@ -212,8 +214,12 @@ WHERE LASTNAME LIKE '%r';
 SELECT * FROM EMPLOYEE
 WHERE FIRSTNAME LIKE '%AM%';  
 
+
+--	Finds all employees  whose FIRSTNAME  have "r" in the second position
+
+
 SELECT * FROM EMPLOYEE
-WHERE FIRSTNAME LIKE '_r%'; --	Finds any values that have "r" in the second position
+WHERE FIRSTNAME LIKE '_r%'; 
 
 SELECT * FROM EMPLOYEE
 WHERE FIRSTNAME LIKE 'm_%'; --	Finds any values that start with "m" and are at least 2 characters in length
@@ -222,8 +228,10 @@ WHERE FIRSTNAME LIKE 'm_%'; --	Finds any values that start with "m" and are at l
 SELECT * FROM EMPLOYEE
 WHERE FIRSTNAME LIKE 'm__%'; --	Finds any values that start with "m" and are at least 3 characters in length
 
+
+--	Finds any values that start with "m" and ends with "i"
 SELECT * FROM EMPLOYEE
-WHERE FIRSTNAME LIKE 'm%o'; --	Finds any values that start with "m" and ends with "o"
+WHERE FIRSTNAME LIKE 'm%i'; 
 
 
 
@@ -275,4 +283,55 @@ Group EMP count BASED ON deptid:
 SELECT deptid ,COUNT(ID)
 FROM EMPLOYEE
 GROUP BY deptid;
+
+
+
+
+
+
+
+1.Address Table
+id    ( PK)       -> NOT NULL and unique
+street
+city
+country 
+
+
+
+2.Employee table
+ID     ( PK)       -> NOT NULL and unique
+firstname
+lastname
+currAddr  (FK)    -> Refers to the id column of Address Table
+
+
+
+Address:
+-----------------------
+id  street     city   country     zip
+100   abc      hyd     in        7676
+200   abc1     che     in        7677
+300   abc2     mum     in        7678
+400   abc3     bang    in        7679
+
+
+Employee:
+---------------------
+id  firstname lastname  currAddr
+10   user1     kumar1      100 
+20   user2     kumar2      200
+30   user3     kumar3      300
+40   user4     kumar4      400
+
+
+1.Display employee
+select * from Employee
+
+
+
+2.Display employee with address?
+[use joins]
+select e.id, e.firstname , e.lastname ,a.street ,a.city, a.country, a.zip
+from Employee e , Address a
+where e.id = a.id
 	    
