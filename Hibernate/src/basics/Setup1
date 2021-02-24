@@ -10,7 +10,7 @@ maven:
 Hib setup:
 ----------------
 1.create the maven project 
-Type groupId : Regnant
+Type groupId : eminent
 Type artifactId : Hibernate
 Finish
 
@@ -86,7 +86,8 @@ hibernate.cfg.xml :
 		
 
 
- 
+
+
  3.Create the entity classes.
    
  (for every table there is a java class. that java class is termed as entity class)
@@ -138,8 +139,6 @@ WE NEED TO REGISTER EVERY ENTITY CLASS INSIDE hibernate.cfg.cml
 
   
 
-
-
  Hibernate components:
  ------------------------
  1.SessionFactory -> 1 time creation for entire application
@@ -149,6 +148,8 @@ WE NEED TO REGISTER EVERY ENTITY CLASS INSIDE hibernate.cfg.cml
  4.Criteria   -> Mostly for dynamic Read operations
  5.Transaction -> txn managemnet
  6.Caching  -> to reduce load and improve perf
+ 
+ 
  
  
  1.How to create session factory obj?

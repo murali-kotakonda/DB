@@ -27,8 +27,10 @@ public class Employee {
 }
 
 
-Java ---HQL---> Hibernate --- SQL --> DB
 
+JAVA Dev  ------[HQL]----------- >HIBERNATE--------[SQL]------------> DATABASE
+
+ 
 
 Java dev needs to write HQL and pass to hiberante
 Hibernate converts the HQL to SQL depends on DB.
@@ -71,7 +73,7 @@ Query  q = session.createQuery("<any hql>");
 A)for insert/update/delete ----> need trasaction object + q.executeUpdate()
 B)For select ----> 
      1.single row    : q.uniqueResult()
-     2.multiple row :  q.list()
+     2.multiple rows :  q.list()
        
          
   

@@ -18,11 +18,12 @@ java frameworks:
 
 adv:
 ---------
-efficiency
-security
 expences
 save time and lots of code
 support for faster development
+efficiency
+security
+
 
 
 dis:
@@ -38,7 +39,6 @@ Hibernate is used for DAO layer for db operations.
 Hibernate is available in the form of jar files.
 
 If we need Hibernate in our project:
------------------------------------------
 In the java project we need to import the Hibernate jar files.
   
   
@@ -86,7 +86,9 @@ if(rs.next()){
 in jdbc: the impact is huge 
 in hibernate : the change is only in one place. 
   
--migrating the database . ex: oracle to mysql
+-migrating the database . 
+ex: oracle to mysql
+
 in jdbc the change is very complex.
 in hibernate the change is required in a single place. 
 ex:change the dialect property in hiberante.xml   
@@ -105,7 +107,8 @@ ex:change the dialect property in hiberante.xml
  ==> For Read queries: convert Row to Java obj is taken care by Hibernate
  
 
--Hibernate supports table relationships like One-To-Many,One-To-One, Many-To-Many-to-Many, Many-To-One.
+-Hibernate supports table relationships 
+like One-To-Many,One-To-One, Many-To-Many-to-Many, Many-To-One.
 
 - Hibernate supports Inheritance, Associations, Collections
 
