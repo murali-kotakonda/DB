@@ -12,7 +12,7 @@ public class Notes {
 		search by emp id : select * from employee where id=<input>
 		passing emp id is mandatory
 		
-		2.[dynamic query] where inputs are are fixed.   -- use Criteria filtering the data 
+		2.[dynamic query] where inputs are not fixed.   -- use Criteria filtering the data 
 		product search:
 		you can search by size , brand , color, price , gender [ optional ]
 		customer can give input for any serach criteria..
@@ -24,7 +24,7 @@ public class Notes {
 		brand=Reebok
 		color=Red
 		price <5000
-		gender= M    ===> select * from Prodcut where size=38
+		gender= M    ===> select * from product where size=38
 											and brand=Reebok
 											and color=Red
 											ane price <5000
@@ -42,6 +42,9 @@ public class Notes {
 		5.call the list method ,
 		list method returns list of employee Objs
 		List<Employee> list = empCriteria.list();
+		6.session close
+
+
 		 
  * */
 	}
