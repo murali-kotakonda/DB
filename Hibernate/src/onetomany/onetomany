@@ -10,7 +10,7 @@ One to Many:
 one customer can have multiple accounts..  
 Relation from customer to account -> One to Many
 
-Multiple accounts belongs to one account..  
+Multiple accounts belongs to one customer
 Relation from account to customer ->Many to One
   
 DB Design:
@@ -39,20 +39,29 @@ package name: onetomany
 1.Accounts.java -> @ManyToOne Annotation with one customer obj
 2.Customer.java -> @OneToMany Annotation with list of account objs
 
+Annotations:
+ 
+Customer.java: 
+----------------------
+  @OneToMany(cascade= CascadeType.ALL , fetch= FetchType.LAZY , 
+			mappedBy="customer") //relate the one to many relationship
+	private List<Accounts> accounts;         
   
-import java.io.Serializable;
+  
+  mappedBy value is equal to the instance variable name in Accounts.java
+  
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+Accounts.java:
+---------------------
+ @ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "custId", nullable = false)
+	private Customer customer;      //relate the many to one relationship
+  
+  
 
 
+
+   
 @Entity
 @Table(name = "Accounts")
 public class Accounts implements Serializable {
@@ -88,64 +97,13 @@ public class Accounts implements Serializable {
 		this.customer = customer;
 	}
 
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
-	public int getId() {
-		return Id;add
-	}
-
-	public void setId(int id) {
-		Id = id;
-	}
-
-	public String getAccountName() {
-		return accountName;
-	}
-
-	public void setAccountName(String accountName) {
-		this.accountName = accountName;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	@Override
-	public String toString() {
-		return "Accounts [Id=" + Id + ", accountName=" + accountName + ", description=" + description + ", customer="
-				+ customer + "]";
-	}
+	 
 
 }
 
 
 
-
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+ 
 @Entity
 @Table(name = "Customer")
 public class Customer implements Serializable {
@@ -164,79 +122,10 @@ public class Customer implements Serializable {
 			mappedBy="customer")
 	private List<Accounts> accounts;
 	
-	public List<Accounts> getAccounts() {
-		if(accounts==null){
-			accounts =  new ArrayList<Accounts>();
-		}
-		return accounts;
-	}
-
-
-	@Override
-	public String toString() {
-		return "Customer [Id=" + Id + ", customerName=" + customerName
-				+ ", age=" + age + "]";
-	}
-
-	public Customer( String customerName, int age) {
-		super();
-		this.customerName = customerName;
-		this.age = age;
-	}
-
-	public Customer() {
-		super();
-	}
-
-	public void setAccounts(List<Accounts> accounts) {
-		this.accounts = accounts;
-	}
-
-	public int getId() {
-		return Id;
-	}
-
-	public void setId(int id) {
-		Id = id;
-	}
-
-	public String getCustomerName() {
-		return customerName;
-	}
-
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
-	}
-
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}
+	 
 
 }
 
-Annotations:
- 
-Customer.java: 
-----------------------
-  @OneToMany(cascade= CascadeType.ALL , fetch= FetchType.LAZY , 
-			mappedBy="customer") //relate the one to many relationship
-	private List<Accounts> accounts;         
-  
-  
-  mappedBy value is equal to the instance variable name in Accounts.java
-  
-
-Accounts.java:
----------------------
- @ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "custId", nullable = false)
-	private Customer customer;      //relate the many to one relationship
-  
-  
 
 2.add entries in hibernate.cfg.xml:
 

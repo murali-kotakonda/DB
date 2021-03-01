@@ -64,3 +64,8 @@ public class Student3 extends Person3{ // relate the pk and fk between Student a
         <mapping class="jointable.Student3"/> 
             
 
+
+
+save person    -> 1 row created in Person3, 
+save employee   -> 1 row created in Person3 + 1 row is created in Employee3
+save student   -> 1 row created in Person3 + 1 row is created in Student3 

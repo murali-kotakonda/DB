@@ -8,16 +8,22 @@ Foriegn key   : is a column in table2 that refers to the primary key of table1
  -> One row in one table1 is related to one row in  table2
     Use @OneToOne for entity class
     ex: one empl has only one address
- -> One to many     -> One row in one table1 is related to multiple rows in  table2
-  Use @OneToMany for entity class
-  ex: one employee has many addresses 
--> Many to one     -> many rows in  table1 is related to one row in  table2
+ -> One to many    
+   -> One row in one table1 is related to multiple rows in  table2
+	  Use @OneToMany for entity class
+	  ex: one employee has many addresses 
+-> Many to one    
+   -> many rows in  table1 is related to one row in  table2
   Use @ManyToOne for entity class
   ex: many address belongs to one employee
--> Many to many    -> many rows in  table1 is related to many row in  table2
+-> Many to many    
+  -> many rows in  table1 is related to many row in  table2
  Use @ManyToMany for entity class
- ex: one emp belongs to multiple departments
+     ex: 
+    one dept has multiple employees
+    one emp belongs to multiple departments
     multiple departments are related to one emp
+    
   
   
  TABLE RELATION SHIP IS Represented using  Primary key + Foriegn key
@@ -43,12 +49,7 @@ Foriegn key   : is a column in table2 that refers to the primary key of table1
           
   2.Entity class:
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+ 
 @Entity
 @Table(name = "AddressDetails")
 public class AddressDetails {
@@ -73,67 +74,10 @@ public class AddressDetails {
 	@Column(name = "pin")
 	private int pin;
 
-	@Override
-	public String toString() {
-		return "AddressDetails [id=" + id + ", streetNo=" + streetNo
-				+ ", city=" + city + ", state=" + state + ", country="
-				+ country + ", pin=" + pin + "]";
-	}
-	public String getStreetNo() {
-		return streetNo;
-	}
-
-	public void setStreetNo(String streetNo) {
-		this.streetNo = streetNo;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	public int getPin() {
-		return pin;
-	}
-
-	public void setPin(int pin) {
-		this.pin = pin;
-	}
-
+	 
 }
 
-
-
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+ 
 
 @Entity
 @Table(name = "EmployeeWithAddress")
@@ -151,46 +95,11 @@ public class EmployeeWithAddress {
 	private int age;
 
 	//@OneToOne(cascade=CascadeType.ALL,fetch= FetchType.LAZY) //type of relation
-  @OneToOne(fetch= FetchType.LAZY) //type of relation
+     @OneToOne(fetch= FetchType.LAZY) //type of relation
 	@JoinColumn(name = "curAddId") // column name
 	private AddressDetails curAddress; // use the dependent obj  as instance variable.
 	
-	@Override
-	public String toString() {
-		return "EmployeeWithAddress [id=" + id + ", name=" + name + ", age=" + age ;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}
-
-	public AddressDetails getCurAddress() {
-		return curAddress;
-	}
-
-	public void setCurAddress(AddressDetails curAddress) {
-		this.curAddress = curAddress;
-	}
+	 
 }
 
 

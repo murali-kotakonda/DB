@@ -14,6 +14,15 @@ public class TestOneToMany {
 		// readCust();
 	}
 
+/**
+1. create session factory
+2. create session obj
+3. create customer obj with data
+4. create 3 accounts objs with data
+5. keep all  3 accounts objs inside customer obj
+6. save customer obj
+*/
+
 	private static void insertCust() {
 
 		Session s = HibernateUtil.getSessionFactory().openSession();
@@ -22,7 +31,7 @@ public class TestOneToMany {
 		// create cust obj
 		Customer cust1 = new Customer("John", 25);
 
-		// creae acc objs
+		// create acc objs
 		Accounts a1 = new Accounts("savings", "John savings desc", cust1);
 		Accounts a2 = new Accounts("current", "John vcurrent desc", cust1);
 		Accounts a3 = new Accounts("loan", "John loan desc", cust1);

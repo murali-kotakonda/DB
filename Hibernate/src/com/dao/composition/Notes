@@ -6,8 +6,7 @@ has-A (composition)
 DB layer:
 ------------
 Table: PersonWithAddress
-Columns: id , userName , age, strret ,city ,state,country ,pin
-
+Columns: id , userName ,
 
 
 Java Layer:

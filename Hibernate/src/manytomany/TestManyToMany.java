@@ -7,6 +7,25 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+/**
+  Req: 
+  there are two students
+  there are two cources
+  both the students attends all the cources
+  save the data to db.
+  
+   solution)
+   1.Create student1(s1) with data
+   2.Create student2(s2) with data
+   3.Create  cource1(c1) with data
+   4.Create  cource2(c2) with data
+   5.add c1 and c2 to s1
+   6.add c1 and c2 to s2
+   7.save s1
+   8.save s2
+   9.commit txn
+   10.close session
+ */
 public class TestManyToMany {
 
 	public static void main(String[] args) {

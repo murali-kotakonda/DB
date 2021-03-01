@@ -49,7 +49,7 @@ student:
 stuid   desc      name
 -------------------------
 7	    employee	  raju
-10	  student	    uma
+10	    student	    uma
 
 
 studentcourseMap:

@@ -36,6 +36,10 @@ person, student, employee info is saved in a single table.
 tableName: Profile
 columns: userid , name , age ,projid, deptid , semid, branchid , type 
 
+Add additional column : "TYPE"  
+Allowed values are : "person" or "student"  or "employee" 
+TYPE is a discriminatory column
+
 1 table
 3 entity classes
 
@@ -44,12 +48,7 @@ columns: userid , name , age ,projid, deptid , semid, branchid , type
 2. When Student is saved  ,  then for columns projid, deptid is saved as null.
 3. When Employee is saved , then for columns  semid, branchid is saved as null.
  
-
-
-Add additional column : "TYPE"  
-Allowed values are : "person" or "student"  or "employee" 
-TYPE is a discriminatory column
-
+ 
 
 DiscriminatorColumn - meaning the column that specifies what type of type .  
 
@@ -72,9 +71,7 @@ id    name    age  semid   branchid  projid   deptid   type
 
 
 
-Get all students:
-----------------
-select * from profile where type = 'student'
+ 
 
   
 1. Get all employee

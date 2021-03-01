@@ -23,3 +23,28 @@ public class TestCriteriaUserNameeq {
 		session.close();
 	}
 }
+
+
+ class Ex5 {
+	public static void main(String[] args) {
+		String userName ="shanvi1";
+
+		// get session obj
+		Session s = HibernateUtil.getSessionFactory().openSession();
+
+		// get criteria obj
+		Criteria empCriteria = s.createCriteria(Employee.class);
+
+		if(userName!=null && !userName.equals("")) {
+			empCriteria.add(Restrictions.eq("userName", userName));
+		}
+		
+		// call list method
+		List<Employee> list = empCriteria.list();
+		System.out.println("size = "+ list.size());
+		for(Employee e: list) {
+			System.out.println(e.getId() + "-"+ e.getUserName() +"-"+ e.getUsersalary());
+		}
+		s.close();
+	}
+}

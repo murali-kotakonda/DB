@@ -41,6 +41,15 @@ public class TestInsertEmpWithAddress {
 
 		s.close();}
 
+/**
+ 1. create session factory
+ 2. create session obj
+ 3. create address obj with data
+ 4. save the address obj
+ 5. create emp obj with data
+ 6. keep address obj inside emp
+ 7. save employee obj
+ */
 	private static void withoutCascadePersist() {
 
 		//create session factory
