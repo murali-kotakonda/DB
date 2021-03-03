@@ -52,7 +52,7 @@ tech : html, css, java script , angular js , jsps
 who : web developers / java developers
 
 
-Backend : Presentation layer +  Service layer +  DAO layer + DB layer
+Backend : Presentation layer +  Service layer + Integration layer +  DAO layer + DB layer
 Front End : UI layer
 
 UI layer  ---> UI handler/Presentation layer -->Service layer --->DAO layer -->DB layer
@@ -60,8 +60,8 @@ UI layer  ---> UI handler/Presentation layer -->Service layer --->DAO layer -->D
 
 DB layer: [Database for permanent storage of data]
 -----------------------------------------------------
-Role:  maiantain the applciation data using Tables
-tech : Oracel or mysql or sqlserver
+Role:  maintain the application data using Tables
+tech : Oracle or mysql or sqlserver
 who :  DB developers
 
 
@@ -69,7 +69,7 @@ who :  DB developers
 UI handler/Presentation layer: [Java code] 
 -------------------------------
 Role:  Request capturing, validation , request deligation to next layer , reponse preparation
-acts as a interactn between web pages and java
+->acts as a interactn between web pages and java
 tech :  servlets  or struts or springs mvc or wicket
 who :  Java developers
 
@@ -78,7 +78,7 @@ who :  Java developers
 DAO layer: [Java code] 
 --------------------
 Role:  For performing the database opeartions Create,Read,Update,Delete
-acts as a interactn between database and java
+->acts as a interactn between database and java
 tech :   JDBC OR Hibernate or Springs JDBC or JPA or eclipselink or Toplink or Ibatics
 who :  Java developers
 
@@ -87,7 +87,7 @@ Integration layer [Java code]
 ----------------------------
 Role:   Write code for communcation between exeternal apps to our applciation.
 acts as a interactn between  external application/services/3rd party and java
-tech :   webservices [Rest or soap ] 
+tech :   webservices [Rest or soap ]/Spring rest 
 who :  Java developers
 
 Service layer
