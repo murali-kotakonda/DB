@@ -10,6 +10,7 @@ age  Number ,
 deptid Number 
 
 
+
 Create Table:
 --------------------------------------
 CREATE TABLE EMPLOYEEINFO (
@@ -26,10 +27,20 @@ CREATE TABLE EMPLOYEEINFO (
 DROP TABLE EMPLOYEEINFO;
 
 -- insert data to EMPLOYEEINFO table
-INSERT INTO EMPLOYEEINFO (ID, FIRSTNAME, AGE, SALARY,deptid)
- VALUES 
-('32111', 'ravi', '26', '70000',100)
+INSERT 
+INTO 
+EMPLOYEEINFO (ID, FIRSTNAME, AGE, SALARY,deptid)
+VALUES 
+(32111, 'ravi', 26, 70000,100);
 
+
+
+-- insert data to EMPLOYEEINFO table
+INSERT 
+INTO 
+EMPLOYEEINFO (ID, FIRSTNAME, LASTNAME, AGE, SALARY,deptid)
+VALUES 
+(32112, 'RAM', 'KUMAR',26, 80000,1000);
 
 
 -- add new column pan 
@@ -173,7 +184,7 @@ FROM EMPLOYEEINFO
 WHERE
  SALARY  < 30000;
 
---GET EMPLOYEEINFO DETAILS WHOSE SALARY IS GREATER THAN 320000
+--GET EMPLOYEEINFO DETAILS WHOSE SALARY IS GREATER THAN 32000
 SELECT * FROM EMPLOYEEINFO
 WHERE SALARY  >  32000;
 
@@ -247,7 +258,6 @@ ORDER BY SALARY DESC
 
 
 -- SIMILAR MATCH QUERIES [ USING Like operator ]  
-
 --	Find all EMPLOYEEINFOs whose  FIRSTNAME start with "A"
 SELECT * 
 FROM EMPLOYEEINFO
@@ -261,7 +271,7 @@ FROM EMPLOYEEINFO
 WHERE 
 LASTNAME LIKE '%r'; 
 
---Find all EMPLOYEEINFOs whose FIRSTNAME  have "AM" in any position
+--Find all EMPLOYEEINFOs whose FIRSTNAME  have "AM" at any position
 SELECT * 
 FROM EMPLOYEEINFO
 WHERE 
@@ -350,31 +360,6 @@ FROM EMPLOYEEINFO
 GROUP BY deptid;
 
 
-TABLE-1:
---------------
-ID   - PK
-NAME
-AGE 
-
-
-TABLE-2:
-----------------
-ID
-ORDERnNO
-ITEMS
-EID   - FK -----> REFERING TO THE ID COLUMN OF TABLE1
-
-
-
-
-
- -- PRIMARY KEY- UNIQUE , NOT NULL     , IS THE UNIQUE IDENTIFICATION FOR THE ROW.
- -- FOREIGN KEY  - IS THE COLUMN THAT  REFERS TO THE PRIMARY KEY OF ANOTHER TABLE.
- 
- 
- 
-
-
 SELECT OrderID, Quantity,
 CASE
     WHEN Quantity > 30 THEN 'The quantity is greater than 30'
@@ -385,6 +370,28 @@ FROM OrderDetails;
 
 
 
+
+ -- PRIMARY KEY- UNIQUE , NOT NULL     , IS THE UNIQUE IDENTIFICATION FOR THE ROW.
+ -- FOREIGN KEY  - IS THE COLUMN THAT  REFERS TO THE PRIMARY KEY OF ANOTHER TABLE.
+ALTER TABLE EMPLOYEEINFO
+ADD PRIMARY KEY (ID)
+
+
+Customer:
+--------------
+ID   - PK
+LastName
+FirstName
+AGE 
+
+
+Orders:
+----------------
+OrderID   -PK 
+OrderNumber
+custId  - FK -----> REFERING TO THE ID COLUMN OF Customer
+
+  
 CREATE TABLE Customer (
     ID Number NOT NULL PRIMARY KEY,
     LastName varchar2(30) NOT NULL,
@@ -407,10 +414,7 @@ ADD PRIMARY KEY (ID);
 ALTER TABLE Customer
 DROP PRIMARY KEY;
 
-
-
-
-
+ 
 ALTER TABLE Orders
 ADD FOREIGN KEY (custId) REFERENCES Customer(ID);
 
@@ -419,6 +423,23 @@ ALTER TABLE Orders
 DROP CONSTRAINT FK_PersonOrder;
 
 
+
+INSERT INTO "KRISHNA"."CUSTOMER" (ID, LASTNAME, FIRSTNAME, AGE) VALUES ('10130', 'kumar', 'Suresh', '28');
+INSERT INTO "KRISHNA"."CUSTOMER" (ID, LASTNAME, FIRSTNAME, AGE) VALUES ('10131', 'kalki', 'Ramesh', '29');
+INSERT INTO "KRISHNA"."CUSTOMER" (ID, LASTNAME, FIRSTNAME, AGE) VALUES ('10132', 'kumar', 'Ram', '27');
+INSERT INTO "KRISHNA"."CUSTOMER" (ID, LASTNAME, FIRSTNAME, AGE) VALUES ('10133', 'Latha', 'Hari', '52');
+INSERT INTO "KRISHNA"."CUSTOMER" (ID, LASTNAME, FIRSTNAME, AGE) VALUES ('10134', 'Kasturi', 'Haripriya', '54');
+
+
+INSERT INTO "KRISHNA"."ORDERS" (ORDERID, ORDERNUMBER, CUSTID) VALUES ('100', '1357', '10131');
+INSERT INTO "KRISHNA"."ORDERS" (ORDERID, ORDERNUMBER, CUSTID) VALUES ('101', '2468', '10131');
+INSERT INTO "KRISHNA"."ORDERS" (ORDERID, ORDERNUMBER, CUSTID) VALUES ('102', '13790', '10131');
+INSERT INTO "KRISHNA"."ORDERS" (ORDERID, ORDERNUMBER, CUSTID) VALUES ('103', '24680', '10132');
+INSERT INTO "KRISHNA"."ORDERS" (ORDERID, ORDERNUMBER, CUSTID) VALUES ('104', '36671', '10132');
+
+
+
+-- Print custId, 1stname and order number 
 select c.id, c.FirstName  , o.OrderNumber 
 from Customer c, Orders  o
 where c.ID=o.custid
@@ -428,6 +449,33 @@ from Customer c, Orders  o
 where c.ID=o.custid
 AND c.id=2000
 
+
+ -- Inner join:
+SELECT c.id, c.FirstName  , o.OrderNumber 
+FROM Customer c 
+INNER JOIN Orders  o
+ON c.ID=o.custid;
+ [All customers with orders]
+
+--LEFT JOIN 
+SELECT  c.id, c.FirstName  , o.OrderNumber 
+FROM Customer c 
+LEFT JOIN Orders  o
+ON c.ID=o.custid;
+ [All customers with or without orders]
+
+--RIGHT JOIN 
+SELECT  c.id, c.FirstName  , o.OrderNumber 
+FROM Customer c 
+RIGHT JOIN Orders  o
+ON c.ID=o.custid;
+ [All Orders with or without customer]
+ 
+
+SELECT column_name(s)
+FROM table1
+LEFT JOIN table2
+ON table1.column_name = table2.column_name;
 
 
 syntax:
@@ -484,14 +532,10 @@ INCREMENT BY 1
 CACHE 10;
 
 
-
-INSERT INTO Persons (Personid,FirstName,LastName)
-VALUES (seq_person.nextval,'Lars','Monsen');
-
-
 Insert into EMPLOYEEINFO (ID,FIRSTNAME,LASTNAME,SALARY,AGE,DEPTID,PAN) values (seq_person.nextval,'ANAND1','kumar2',37000,30,28,'KHHJ1087L');
 
-
+ INSERT INTO"CUSTOMER" (ID, LASTNAME, FIRSTNAME, AGE) VALUES 
+ (seq_person.nextval, 'kumar1131', 'Suresh13131', '32');
 
 
 
