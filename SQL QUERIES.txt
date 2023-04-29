@@ -155,6 +155,11 @@ OTHER possible operators for conditions
 
 --READ OPERATIONS
 
+
+select * from EMPLOYEEINFO where PAN IS NULL;
+
+select * from EMPLOYEEINFO where PAN IS NOT NULL;
+
 --READ ALL THE ROWS FROM EMPLOYEEINFO TABLE
 SELECT * FROM EMPLOYEEINFO ;
 -- * SPECIFIES TO FETCH ALL COLUMNS
@@ -256,6 +261,9 @@ ORDER BY SALARY DESC
 
 
 
+select * from EMPLOYEEINFO where PAN IS NULL;
+
+select * from EMPLOYEEINFO where PAN IS NOT NULL;
 
 -- SIMILAR MATCH QUERIES [ USING Like operator ]  
 --	Find all EMPLOYEEINFOs whose  FIRSTNAME start with "A"
